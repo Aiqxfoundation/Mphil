@@ -1,0 +1,6 @@
+{
+  "name": "MPhil Chemistry Complete Study Hub",
+  "description": "Comprehensive academic study and exam preparation platform for MPhil Chemistry students at University of Sargodha, covering all 7 core subjects with verified syllabi, lessons, numerical solutions, question banks, and bilingual support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

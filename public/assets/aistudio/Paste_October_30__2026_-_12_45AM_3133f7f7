@@ -1,0 +1,1963 @@
+PROJECT: MPhil Chemistry Complete Study Hub
+PLATFORM: Google AI Studio
+GOAL: Build a complete, professional, content-rich educational web application for MPhil Chemistry students.
+
+IMPORTANT:
+I DO NOT WANT AN EMPTY WEBSITE, A UI DEMO, OR A COLLECTION OF EMPTY TABS.
+
+I want a fully functional educational platform containing substantial, accurate, organized, topic-by-topic study material for all seven subjects listed below.
+
+The main purpose of this app is to help a student understand the complete syllabus, learn difficult concepts, prepare for university examinations, practice questions, and revise independently.
+
+Do not consider the project complete merely because pages, cards, buttons, or navigation have been created.
+
+The actual learning content is the most important part of this project.
+
+==================================================
+1. THE SEVEN COMPLETE SUBJECTS
+==================================================
+
+Create a dedicated subject area for each of the following seven subjects.
+
+SUBJECT 1:
+Scientific Writing & Research Methods
+
+SUBJECT 2:
+Applied Artificial Intelligence for Decision Making
+
+SUBJECT 3:
+Surface Chemistry
+
+SUBJECT 4:
+Polymers and Advanced Composite Materials
+
+SUBJECT 5:
+Advanced Photochemistry
+
+SUBJECT 6:
+Literature Survey and Technical Writing
+
+SUBJECT 7:
+Translation of Holy Quran
+
+All seven subjects must be included.
+
+Do not remove, replace, merge, or forget any subject.
+
+Every subject must have its own complete syllabus map, topic list, lessons, explanations, examples, questions, MCQs, quizzes, revision material, and progress tracking.
+
+==================================================
+2. SYLLABUS RESEARCH AND VERIFICATION
+==================================================
+
+Before writing the lessons, research and organize the syllabus of each subject.
+
+Use the official University of Sargodha website, official prospectuses, available course outlines, and authentic academic references.
+
+Official resources:
+
+University of Sargodha:
+https://su.edu.pk/
+
+UOS Chemistry Department:
+https://www.su.edu.pk/department/chemistry
+
+UOS MPhil Chemistry programs:
+https://su.edu.pk/programs/9/M%20Phil/chemistry
+
+UOS Chemistry course outline:
+https://su.edu.pk/upload/department/Chemsitry_1609322424.pdf
+
+UOS prospectus:
+https://www.uos.edu.pk/public/upload/UOS-Prospectus-2025.pdf
+
+Important syllabus rule:
+
+Some available UOS documents contain older course structures. Certain course titles and codes may belong to a different degree level or academic session.
+
+Therefore:
+
+1. Verify the correct degree level and academic session.
+2. Use my supplied CHEM-7101 Scientific Writing & Research Methods syllabus as the starting point for that subject.
+3. Do not incorrectly label an older or PhD syllabus as the current MPhil syllabus.
+4. Keep official syllabus topics separate from supplementary advanced learning topics.
+5. If the exact official syllabus is unavailable, mark it as requiring verification.
+6. Never invent an official course outline.
+7. Build a comprehensive learning curriculum around the verified topics.
+8. Map every official syllabus topic to one or more actual lessons.
+9. Display syllabus coverage and identify any missing topics.
+
+For Surface Chemistry, research the available course material associated with CHEM-7124.
+
+For Polymers and Advanced Composite Materials, research the available material associated with CHEM-7119.
+
+For Advanced Photochemistry, research the available material associated with CHEM-7123.
+
+Treat these codes as references found in available UOS documentation, not automatic proof of the current MPhil session's course codes.
+
+==================================================
+3. SUBJECT 1: SCIENTIFIC WRITING & RESEARCH METHODS
+==================================================
+
+Use the following supplied syllabus as the starting curriculum.
+
+MODULE 1: INTRODUCTION TO RESEARCH
+
+Teach:
+- Meaning and purpose of scientific research.
+- Research characteristics and objectives.
+- Basic, applied, and experimental research.
+- Quantitative and qualitative research.
+- Research problems and research questions.
+- Research objectives and hypotheses.
+- Independent, dependent, and controlled variables.
+- Research design and methodology.
+- Reliability, validity, accuracy, and precision.
+- Scientific reasoning and critical thinking.
+
+MODULE 2: SCIENTIFIC LITERATURE
+
+Teach:
+- Primary, secondary, and tertiary literature.
+- Original research articles.
+- Review articles and systematic reviews.
+- Scientific books and reference works.
+- Chemical Abstracts.
+- Author indexes and formula indexes.
+- Scientific journals and conference proceedings.
+- Patents and technical reports.
+- Evaluating source quality.
+- Identifying research gaps.
+
+MODULE 3: DIGITAL RESEARCH DATABASES
+
+Explain the purpose, features, advantages, and limitations of:
+- Web of Science.
+- SciFinder-n.
+- PubChem.
+- Reaxys.
+- ChemSpider.
+- Beilstein, where access and historical relevance can be verified.
+- Google Scholar.
+- Institutional library databases.
+- Publisher websites and journal platforms.
+
+Teach:
+- Keyword development.
+- Boolean operators AND, OR, and NOT.
+- Exact phrase searching.
+- Wildcards and truncation where supported.
+- Search filters.
+- Citation searching.
+- Author searching.
+- Chemical structure searching where available.
+- Exporting references.
+- Evaluating retrieved results.
+
+Include real, worked search examples relevant to chemistry.
+
+MODULE 4: LITERATURE SURVEY
+
+Teach:
+- Selecting a research topic.
+- Defining the research problem.
+- Finding relevant literature.
+- Building a search strategy.
+- Screening and selecting sources.
+- Reading scientific papers efficiently.
+- Extracting key findings.
+- Comparing different studies.
+- Organizing references.
+- Identifying research gaps.
+- Writing a literature review.
+- Constructing a literature review matrix.
+- Avoiding unsupported conclusions.
+
+Provide a complete worked example of a literature survey on a chemistry research topic.
+
+MODULE 5: SCIENTIFIC REFERENCING
+
+Teach:
+- In-text citations.
+- Reference lists and bibliographies.
+- Common referencing styles.
+- DOI and ISBN.
+- Citation managers.
+- EndNote.
+- Mendeley.
+- Reference accuracy.
+- Direct quotations and paraphrasing.
+- Citing figures, tables, and datasets.
+- Managing references for a thesis.
+
+MODULE 6: TECHNICAL AND SCIENTIFIC WRITING
+
+Teach:
+- Academic writing principles.
+- Scientific language and clarity.
+- Grammar and sentence structure.
+- Paragraph organization.
+- Formal scientific tone.
+- Abstract writing.
+- Introduction writing.
+- Methods and materials.
+- Results and discussion.
+- Conclusions.
+- Keywords.
+- Tables and figures.
+- Scientific equations.
+- Research limitations.
+- Acknowledgements.
+- References and appendices.
+
+MODULE 7: SYNOPSIS AND THESIS
+
+Teach:
+- Selecting a thesis topic.
+- Writing a research title.
+- Background and rationale.
+- Problem statement.
+- Research objectives.
+- Research questions and hypotheses.
+- Literature review.
+- Research methodology.
+- Expected outcomes.
+- Research timeline.
+- Thesis chapters.
+- Results and discussion.
+- Conclusions and future recommendations.
+- Thesis formatting.
+- Preparing for a thesis defense.
+
+Provide a complete sample research synopsis and explain every section.
+
+MODULE 8: RESEARCH ARTICLES AND COMMUNICATION
+
+Teach:
+- Original research articles.
+- Review articles.
+- Conference papers.
+- Manuscript preparation.
+- Journal selection.
+- Author guidelines.
+- Journal templates.
+- Cover letters.
+- Peer review.
+- Responding to reviewers.
+- Revisions and resubmissions.
+- Scientific presentations.
+- Research posters.
+- Conference proceedings.
+- Patent manuscripts and the basics of intellectual property.
+
+MODULE 9: RESEARCH METRICS
+
+Teach:
+- Journal impact factor and its limitations.
+- h-index.
+- i10-index.
+- Citation counts.
+- Journal quartiles Q1, Q2, Q3, and Q4.
+- SCImago Journal Rank.
+- Web of Science indexing.
+- HEC Journal Recognition System (HJRS).
+- Evaluating journal quality.
+- Predatory journals and misleading metrics.
+
+Verify time-sensitive journal rankings and indexing information from authoritative sources.
+
+MODULE 10: RESEARCH ETHICS
+
+Teach:
+- Plagiarism.
+- Self-plagiarism.
+- Fabrication and falsification.
+- Data integrity.
+- Research reproducibility.
+- Research transparency.
+- Authorship and contributorship.
+- Conflicts of interest.
+- Ethical publication.
+- Responsible use of AI.
+- AI-generated content verification.
+- Human and animal research ethics.
+- Research permissions and informed consent.
+- Turnitin reports and similarity interpretation.
+
+MODULE 11: PRACTICAL RESEARCH WORKFLOW
+
+Provide step-by-step practical exercises:
+- Search a chemistry database.
+- Find five relevant research papers.
+- Compare research methods and findings.
+- Create a reference library.
+- Prepare a literature review matrix.
+- Write an abstract.
+- Create a research synopsis.
+- Prepare a sample manuscript.
+- Evaluate a journal.
+- Check references and plagiarism risks.
+
+Use the supplied 18-week course schedule to organize this subject where applicable.
+
+==================================================
+4. SUBJECT 2: APPLIED ARTIFICIAL INTELLIGENCE
+FOR DECISION MAKING
+==================================================
+
+Build a complete, beginner-friendly but academically meaningful course.
+
+MODULE 1: AI FUNDAMENTALS
+
+Teach:
+- Definition of artificial intelligence.
+- History and development of AI.
+- Narrow AI and general AI.
+- AI, machine learning, and deep learning.
+- Rule-based systems.
+- Data, information, and knowledge.
+- Real-world applications.
+- Benefits and limitations.
+
+MODULE 2: DATA AND DECISION MAKING
+
+Teach:
+- Decision-making processes.
+- Structured and unstructured data.
+- Data collection and preprocessing.
+- Missing values and noisy data.
+- Data quality.
+- Descriptive statistics.
+- Probability and uncertainty.
+- Evidence-based decisions.
+- Decision trees.
+- Decision matrices.
+- Multi-criteria decision analysis.
+
+MODULE 3: MACHINE LEARNING
+
+Teach:
+- Supervised learning.
+- Unsupervised learning.
+- Reinforcement learning.
+- Classification and regression.
+- Clustering.
+- Training and testing datasets.
+- Features and labels.
+- Overfitting and underfitting.
+- Cross-validation.
+- Model evaluation.
+- Accuracy, precision, recall, and F1-score.
+- Confusion matrices.
+- Regression evaluation metrics.
+
+Include simple numerical examples.
+
+MODULE 4: AI METHODS FOR DECISION SUPPORT
+
+Teach:
+- Expert systems.
+- Knowledge-based systems.
+- Predictive analytics.
+- Recommendation systems.
+- Optimization.
+- Neural networks.
+- Natural language processing.
+- Generative AI.
+- Large language models.
+- AI-assisted planning.
+- Risk assessment.
+- Forecasting.
+- Human-in-the-loop decisions.
+
+MODULE 5: RESPONSIBLE AI
+
+Teach:
+- Bias and fairness.
+- Explainability.
+- Transparency.
+- Privacy.
+- Security.
+- Accountability.
+- Hallucinations.
+- Verification of AI-generated information.
+- Human oversight.
+- Ethical decision-making.
+
+MODULE 6: AI IN CHEMISTRY AND RESEARCH
+
+Teach:
+- AI-assisted literature searching.
+- Research paper summarization.
+- Chemical property prediction.
+- Materials discovery.
+- Polymer research.
+- Photochemical research.
+- Data analysis.
+- Experimental planning.
+- Predictive modelling.
+- Scientific writing assistance.
+- Limitations of AI in scientific research.
+
+Clearly distinguish reliable scientific evidence from AI-generated suggestions.
+
+MODULE 7: PRACTICAL PROJECTS
+
+Include complete tutorials for:
+- Building a decision matrix.
+- Comparing alternatives.
+- Evaluating a simple prediction model.
+- Analysing a small dataset.
+- Using AI responsibly for a literature survey.
+- Evaluating AI-generated scientific claims.
+
+Every project must include the objective, tools, steps, sample data, results, interpretation, limitations, and questions.
+
+==================================================
+5. SUBJECT 3: SURFACE CHEMISTRY
+==================================================
+
+Develop an advanced university-level course with simple explanations.
+
+MODULE 1: FUNDAMENTALS
+
+Teach:
+- Surface and interface.
+- Surface energy.
+- Surface tension.
+- Intermolecular forces.
+- Adsorption and absorption.
+- Physisorption and chemisorption.
+- Adsorbents and adsorbates.
+- Factors affecting adsorption.
+- Applications in chemistry.
+
+MODULE 2: ADSORPTION ISOTHERMS
+
+Teach in detail:
+- Langmuir adsorption isotherm.
+- Freundlich adsorption isotherm.
+- BET adsorption theory.
+- Henry's law where applicable to adsorption and dilute systems.
+- Assumptions behind each model.
+- Mathematical equations.
+- Derivations where appropriate.
+- Graphical representations.
+- Parameter meanings.
+- Conditions and limitations.
+- Comparison of models.
+
+Include solved numerical problems with all calculation steps and units.
+
+MODULE 3: GAS-SOLID ADSORPTION
+
+Teach:
+- Gas adsorption on solid surfaces.
+- Monolayer and multilayer adsorption.
+- Surface area determination.
+- Porous materials.
+- Adsorption kinetics.
+- Adsorption equilibrium.
+- Pore size and surface structure.
+- BET surface-area calculations.
+- Experimental interpretation.
+
+MODULE 4: SURFACE THERMODYNAMICS
+
+Teach:
+- Surface free energy.
+- Gibbs adsorption isotherm.
+- Surface excess concentration.
+- Chemical potential.
+- Interfacial thermodynamics.
+- Contact angle.
+- Wetting.
+- Capillarity.
+- Young's equation.
+- Surface tension measurement.
+
+MODULE 5: SURFACTANTS AND COLLOIDS
+
+Teach:
+- Surfactants.
+- Micelles.
+- Critical micelle concentration.
+- Hydrophilic and hydrophobic groups.
+- Emulsions.
+- Foams.
+- Colloidal stability.
+- Zeta potential.
+- Electrical double layers.
+- Coagulation and flocculation.
+- DLVO theory at an appropriate advanced level.
+
+MODULE 6: SURFACE CHARACTERIZATION
+
+Teach the principles, working, uses, advantages, limitations, and interpretation of:
+- SEM.
+- TEM.
+- AFM.
+- STM.
+- XPS.
+- BET analysis.
+- LEED.
+- FEM.
+- FIM.
+- Other relevant techniques supported by the verified syllabus.
+
+Explain which property each technique measures.
+
+MODULE 7: CATALYSIS AND APPLICATIONS
+
+Teach:
+- Heterogeneous catalysis.
+- Active sites.
+- Adsorption and desorption in catalysis.
+- Surface reaction mechanisms.
+- Catalyst poisoning.
+- Catalyst supports.
+- Surface modification.
+- Industrial catalysis.
+- Environmental applications.
+- Nanomaterial surfaces.
+- Electrochemical interfaces.
+
+Include concept maps connecting adsorption, surface energy, catalysis, and materials chemistry.
+
+==================================================
+6. SUBJECT 4: POLYMERS AND ADVANCED COMPOSITE MATERIALS
+==================================================
+
+Create a complete advanced polymer science course.
+
+MODULE 1: POLYMER FUNDAMENTALS
+
+Teach:
+- Monomers and polymers.
+- Natural and synthetic polymers.
+- Polymer classification.
+- Thermoplastics and thermosets.
+- Elastomers and fibres.
+- Linear, branched, and crosslinked polymers.
+- Polymer nomenclature.
+- Repeat units.
+- Polymer architecture.
+- Industrial applications.
+
+MODULE 2: POLYMERIZATION
+
+Teach:
+- Addition polymerization.
+- Condensation polymerization.
+- Chain-growth mechanisms.
+- Step-growth mechanisms.
+- Free-radical polymerization.
+- Ionic polymerization.
+- Coordination polymerization.
+- Copolymerization.
+- Initiators and catalysts.
+- Reaction mechanisms.
+- Molecular weight development.
+
+Include reaction equations and worked examples.
+
+MODULE 3: POLYMER STRUCTURE
+
+Teach:
+- Configuration and conformation.
+- Tacticity.
+- Stereoregularity.
+- Crystalline and amorphous regions.
+- Glass transition temperature.
+- Melting temperature.
+- Molecular packing.
+- Chain flexibility.
+- Intermolecular forces.
+- Structure-property relationships.
+
+MODULE 4: MOLECULAR WEIGHT
+
+Teach:
+- Number-average molecular weight.
+- Weight-average molecular weight.
+- Molecular weight distribution.
+- Polydispersity index.
+- Degree of polymerization.
+- Viscosity-average molecular weight.
+- Molecular weight measurement methods.
+
+Include fully solved numerical problems.
+
+MODULE 5: POLYMER SOLUTIONS AND THERMODYNAMICS
+
+Teach:
+- Polymer dissolution.
+- Solubility parameters.
+- Polymer-solvent interactions.
+- Flory-Huggins theory.
+- Phase separation.
+- Polymer blends.
+- Plasticization.
+- Swelling.
+- Gel formation.
+- Factors affecting miscibility.
+
+MODULE 6: POLYMER CHARACTERIZATION
+
+Teach:
+- FTIR.
+- NMR.
+- UV-Visible spectroscopy where relevant.
+- GPC/SEC.
+- DSC.
+- TGA.
+- DMA.
+- XRD.
+- SEM and TEM.
+- Rheology.
+- Mechanical testing.
+- Thermal stability analysis.
+
+Explain what each technique measures and how to interpret typical results.
+
+MODULE 7: POLYMER PROPERTIES
+
+Teach:
+- Mechanical properties.
+- Tensile strength.
+- Elastic modulus.
+- Stress-strain curves.
+- Viscoelasticity.
+- Creep and stress relaxation.
+- Polymer rheology.
+- Electrical properties.
+- Magnetic properties where relevant.
+- Thermal properties.
+- Degradation and aging.
+
+MODULE 8: ADVANCED COMPOSITE MATERIALS
+
+Teach:
+- Definition and classification of composites.
+- Matrix and reinforcement.
+- Polymer matrix composites.
+- Metal matrix composites.
+- Ceramic matrix composites.
+- Fibre-reinforced composites.
+- Particle-reinforced composites.
+- Nanocomposites.
+- Hybrid composites.
+- Interfacial adhesion.
+- Load transfer.
+- Rule of mixtures.
+- Mechanical performance.
+- Composite fabrication techniques.
+- Composite characterization.
+- Failure mechanisms.
+- Industrial applications.
+
+MODULE 9: ADVANCED MATERIALS AND SUSTAINABILITY
+
+Teach:
+- Conducting polymers.
+- Biodegradable polymers.
+- Hydrogels.
+- Polymer nanocomposites.
+- Smart polymers.
+- Self-healing materials.
+- Recycling.
+- Polymer degradation.
+- Sustainable materials.
+- Current research directions.
+
+Provide worked calculations, comparison tables, diagrams, and research case studies.
+
+==================================================
+7. SUBJECT 5: ADVANCED PHOTOCHEMISTRY
+==================================================
+
+Build a complete advanced course progressing from fundamentals to university-level theory.
+
+MODULE 1: FUNDAMENTALS OF PHOTOCHEMISTRY
+
+Teach:
+- Electromagnetic radiation.
+- Wavelength and frequency.
+- Photon energy.
+- Absorption of radiation.
+- Electronic excitation.
+- Ground and excited states.
+- Absorption spectra.
+- Energy-level diagrams.
+- Photochemical and photophysical processes.
+
+Include solved calculations using:
+
+E = hν = hc/λ
+
+Explain all symbols, constants, units, and conversions.
+
+MODULE 2: LIGHT ABSORPTION
+
+Teach:
+- Beer-Lambert law.
+- Absorption coefficient.
+- Molar absorptivity.
+- UV-Visible spectroscopy.
+- Absorption bands.
+- Electronic transitions.
+- Chromophores and auxochromes.
+- Factors affecting absorption.
+- Spectral interpretation.
+
+MODULE 3: EXCITED STATES
+
+Teach:
+- Singlet states.
+- Triplet states.
+- Excited-state lifetimes.
+- Fluorescence.
+- Phosphorescence.
+- Internal conversion.
+- Intersystem crossing.
+- Vibrational relaxation.
+- Jablonski diagrams.
+- Excited-state energy transfer.
+
+MODULE 4: PHOTOCHEMICAL LAWS
+
+Teach:
+- Grotthuss-Draper law.
+- Stark-Einstein law.
+- Quantum yield.
+- Primary and secondary photochemical processes.
+- Photochemical reaction kinetics.
+- Reaction mechanisms.
+- Factors affecting quantum yield.
+- Quantum yield calculations.
+
+MODULE 5: EXPERIMENTAL PHOTOCHEMISTRY
+
+Teach:
+- Radiation sources.
+- Lamps and LEDs.
+- Monochromators and filters.
+- Photoreactors.
+- Chemical actinometry.
+- Actinometers.
+- Light intensity measurement.
+- Experimental controls.
+- Reaction monitoring.
+- Sources of error.
+- Safety and reproducibility.
+
+MODULE 6: PHOTOCHEMICAL MECHANISMS
+
+Teach:
+- Energy transfer.
+- Electron transfer.
+- Quenching.
+- Stern-Volmer analysis.
+- Excimers and exciplexes.
+- Photochemical reaction pathways.
+- Photosensitization.
+- Radical formation.
+- Photochemical kinetics.
+
+MODULE 7: ADVANCED APPLICATIONS
+
+Teach:
+- Photocatalysis.
+- Semiconductor photocatalysts.
+- Solar energy conversion.
+- Photovoltaic principles.
+- Artificial photosynthesis.
+- Environmental photochemistry.
+- Atmospheric photochemistry.
+- Photodegradation.
+- Photopolymerization.
+- Organic photochemistry.
+- Photodynamic applications where relevant.
+
+Explain mechanisms using properly labelled diagrams.
+
+Include worked numerical problems, spectra interpretation, mechanism questions, and research examples.
+
+==================================================
+8. SUBJECT 6: LITERATURE SURVEY AND TECHNICAL WRITING
+==================================================
+
+This subject overlaps with Scientific Writing & Research Methods, but it must have its own dedicated learning pathway.
+
+Do not duplicate the same shallow content.
+
+Focus on practical mastery of literature research and technical communication.
+
+MODULE 1:
+Finding, screening, and organizing scientific literature.
+
+MODULE 2:
+Developing research questions and search strategies.
+
+MODULE 3:
+Advanced database searching and citation tracking.
+
+MODULE 4:
+Reading and critically evaluating research papers.
+
+MODULE 5:
+Research gap identification and literature matrices.
+
+MODULE 6:
+Writing a coherent literature review.
+
+MODULE 7:
+Technical writing, scientific style, and argument structure.
+
+MODULE 8:
+Writing abstracts, introductions, methods, results, and conclusions.
+
+MODULE 9:
+Figures, tables, captions, references, and supplementary information.
+
+MODULE 10:
+Preparing a thesis, research proposal, review paper, and original article.
+
+MODULE 11:
+Journal selection, peer review, revision, and publication ethics.
+
+MODULE 12:
+Conference presentations, research posters, scientific communication, and technical reports.
+
+MODULE 13:
+Patent literature and technical documentation.
+
+MODULE 14:
+Research metrics and critical evaluation of publication venues.
+
+MODULE 15:
+A complete practical project from literature search to a finished review.
+
+For each module, provide:
+- A worked example.
+- A weak example and an improved example.
+- A practical exercise.
+- A model answer.
+- A checklist.
+- Assessment questions.
+
+==================================================
+9. SUBJECT 7: TRANSLATION OF HOLY QURAN
+==================================================
+
+Create a respectful, academically organized Quran translation study area.
+
+First, identify the prescribed Surahs, Ayahs, chapters, and examination requirements from the actual course outline when available.
+
+Do not invent the university's prescribed Quran syllabus.
+
+For each assigned passage, provide:
+
+1. Verified Arabic text.
+2. Ayah numbers and Surah name.
+3. Accurate Urdu translation.
+4. Word-by-word meaning where useful.
+5. Important Arabic vocabulary.
+6. Basic grammatical observations where relevant.
+7. Clear explanation of the translation.
+8. Relevant context where reliably sourced.
+9. Distinction between translation and tafsir.
+10. Important learning points.
+11. Vocabulary revision cards.
+12. Translation exercises.
+13. Short questions and answers.
+14. Long questions and answers where suitable.
+15. MCQs and practice tests.
+16. Revision and memorization support where relevant.
+
+Use reliable Quran sources such as:
+https://quran.com/
+https://tanzil.net/
+
+Verify Arabic text carefully.
+
+Use recognized translations and identify the translator and translation edition.
+
+Do not fabricate Arabic text, Ayah numbers, translations, or religious references.
+
+Where interpretations differ, present the difference respectfully and clearly identify the source.
+
+Do not present AI-generated religious interpretations as authoritative tafsir.
+
+Provide actual passage-based learning content instead of merely creating a Quran tab.
+
+==================================================
+10. EVERY TOPIC MUST HAVE COMPLETE LESSONS
+==================================================
+
+This is the most important requirement.
+
+For EVERY topic in EVERY subject, create a meaningful educational lesson.
+
+Each lesson must include the following sections where applicable:
+
+A. Learning objectives.
+
+B. Prerequisite knowledge.
+
+C. Simple introduction.
+
+D. Clear definition of every important term.
+
+E. Detailed conceptual explanation.
+
+F. Step-by-step explanation of difficult ideas.
+
+G. Important principles and theories.
+
+H. Relevant equations and derivations.
+
+I. Explanation of every symbol and unit.
+
+J. Fully worked examples.
+
+K. Real-world applications.
+
+L. Chemistry-related examples where appropriate.
+
+M. Diagrams, reaction schemes, flowcharts, or concept maps.
+
+N. Comparison tables where useful.
+
+O. Common misunderstandings and mistakes.
+
+P. Important examination points.
+
+Q. Short-answer questions with model answers.
+
+R. Long-answer questions with structured answers.
+
+S. MCQs with correct answers and explanations.
+
+T. Practice exercises.
+
+U. A complete answer key for practice exercises.
+
+V. A concise revision summary.
+
+W. Flashcards for important definitions and concepts.
+
+X. References and further reading.
+
+Y. Related topics and prerequisite lessons.
+
+Do not force irrelevant sections into topics where they do not apply.
+
+The objective is complete understanding, not unnecessary repetition.
+
+==================================================
+11. ACTUAL STUDY CONTENT IS MANDATORY
+==================================================
+
+Do not create lessons containing only:
+
+- A heading.
+- Two sentences.
+- A list of topic names.
+- A generic introduction.
+- Placeholder paragraphs.
+- Repeated AI-generated filler.
+- Questions without answers.
+- MCQs without explanations.
+- Examples without solutions.
+- Empty tabs.
+- Fake completion percentages.
+
+Each lesson must contain sufficient depth for the subject and the complexity of the topic.
+
+A simple definition is not a complete lesson.
+
+For a difficult topic, explain it from the beginning, then progress to advanced understanding.
+
+Use multiple examples when one example is insufficient.
+
+For mathematical and chemistry topics, show calculations and reasoning step by step.
+
+For research-writing topics, provide actual sample paragraphs, documents, and improved versions.
+
+For Quran translation, include actual verified assigned passages and their learning material.
+
+Never mark a topic complete if its required content is missing.
+
+==================================================
+12. VERIFIED MCQS AND QUESTION BANK
+==================================================
+
+Create a substantial question bank for all seven subjects.
+
+Questions must be linked to the specific lessons they assess.
+
+Each MCQ must contain:
+
+- Question.
+- Four meaningful options.
+- One verified correct answer, unless explicitly labelled as multiple-select.
+- Explanation of why the answer is correct.
+- Explanation of common distractors where useful.
+- Difficulty level.
+- Subject and topic.
+- Reference or verification source where appropriate.
+
+Do not generate random questions merely to increase the total.
+
+Avoid ambiguous questions and duplicate questions.
+
+Check equations, terminology, calculations, and factual claims before adding them to the bank.
+
+For each topic, provide an appropriate number of questions based on its depth.
+
+The platform must support:
+- Topic-wise quizzes.
+- Module-wise quizzes.
+- Full-subject tests.
+- Mixed-subject practice.
+- Timed examinations.
+- Untimed practice.
+- Instant feedback.
+- Review of incorrect answers.
+- Retry incorrect questions.
+- Bookmarked questions.
+- Question explanations.
+- Randomized question order where appropriate.
+- Score summaries.
+- Weak-topic analysis.
+
+Build exam simulations using the verified syllabus and clearly label any practice exam that is not an official university paper.
+
+Never claim that generated questions are actual past-paper questions unless the original source has been verified.
+
+==================================================
+13. SHORT QUESTIONS AND LONG QUESTIONS
+==================================================
+
+Every subject must have a dedicated question bank.
+
+SHORT QUESTIONS:
+- Definitions.
+- Differences between concepts.
+- Short explanations.
+- Principles and laws.
+- Important terms.
+- Applications.
+- Conceptual reasoning.
+
+LONG QUESTIONS:
+- Detailed explanations.
+- Derivations.
+- Mechanisms.
+- Comparisons.
+- Critical discussions.
+- Research-based questions.
+- Applications.
+- Numerical problems where appropriate.
+
+Every question must have a complete model answer.
+
+Long answers should be organized into:
+- Introduction.
+- Main explanation.
+- Equations or diagrams where relevant.
+- Examples.
+- Applications or critical analysis.
+- Conclusion.
+
+Answers must match postgraduate academic expectations.
+
+Also include:
+- Important revision questions.
+- Topic-wise practice.
+- Mixed examination practice.
+- Answer-writing guidance.
+- Marking points or rubrics.
+
+Do not label questions as guaranteed examination questions.
+
+==================================================
+14. INTERACTIVE CONCEPT CARDS
+==================================================
+
+Create meaningful concept cards throughout the app.
+
+Every concept card should include:
+- Concept name.
+- Clear definition.
+- Explanation.
+- Example.
+- Important formula where applicable.
+- Related concepts.
+- Common misconception.
+- A link to the complete lesson.
+- One or more practice questions.
+
+Concept cards must be genuinely interconnected.
+
+Examples:
+
+Surface Chemistry:
+Adsorption -> Adsorption Isotherms -> BET Surface Area -> Porous Materials -> Heterogeneous Catalysis.
+
+Polymers:
+Monomers -> Polymerization -> Molecular Weight -> Polymer Structure -> Thermal Properties -> Composite Performance.
+
+Photochemistry:
+Photon Energy -> Light Absorption -> Excited States -> Quantum Yield -> Photochemical Reactions -> Photocatalysis.
+
+Scientific Research:
+Research Question -> Literature Search -> Research Gap -> Methodology -> Data Analysis -> Scientific Writing -> Publication.
+
+AI:
+Data Quality -> Machine Learning -> Prediction -> Model Evaluation -> Decision Support -> Responsible AI.
+
+Show these connections visually and make each connected concept clickable.
+
+Build a cross-subject knowledge graph where relevant concepts from different subjects are connected.
+
+Do not create decorative cards that contain no educational value.
+
+==================================================
+15. PROFESSIONAL WEB APP DESIGN
+==================================================
+
+Create a premium, modern, responsive educational platform.
+
+The interface should feel like a serious university learning platform, not a basic school project.
+
+Include:
+
+1. Professional landing page.
+2. Student dashboard.
+3. Seven subject cards.
+4. Subject overview pages.
+5. Complete syllabus pages.
+6. Module pages.
+7. Detailed lesson pages.
+8. Topic navigation.
+9. Search across all learning content.
+10. Interactive quizzes.
+11. Question banks.
+12. Flashcards.
+13. Bookmarks.
+14. Personal notes.
+15. Revision planner.
+16. Study progress.
+17. Exam preparation dashboard.
+18. Reference library.
+19. English/Roman Urdu language controls.
+20. Responsive mobile interface.
+21. Desktop and tablet layouts.
+22. Dark and light themes.
+23. Previous and next lesson navigation.
+24. Related concept recommendations.
+25. Continue-learning feature.
+
+Use a clean typography system, appropriate spacing, readable lesson layouts, professional colors, and accessible controls.
+
+Use diagrams, charts, reaction schemes, and illustrations when they improve understanding.
+
+Avoid excessive animations, unnecessary gradients, cluttered cards, and oversized empty sections.
+
+The learning content must remain the focus.
+
+==================================================
+16. ENGLISH AND ROMAN URDU SUPPORT
+==================================================
+
+Provide an English/Roman Urdu language switch.
+
+The switch must work throughout the entire app.
+
+English mode must display actual English learning content.
+
+Roman Urdu mode must display the corresponding Roman Urdu explanations, examples, and learning guidance.
+
+Do not simply translate navigation labels while leaving all lessons in English.
+
+Maintain scientifically accurate terminology.
+
+For example:
+
+Adsorption:
+English: Adsorption is the accumulation of particles at a surface or interface.
+
+Roman Urdu: Adsorption woh process hai jisme molecules ya particles kisi surface par jama hote hain.
+
+Then explain the concept in detail in the selected language.
+
+Keep chemical formulas, standard symbols, equations, and scientific notation accurate in both modes.
+
+For Quran content, preserve verified Arabic text and provide separately identified Urdu translations and explanations.
+
+Do not present Roman Urdu as a substitute for the original Arabic text.
+
+==================================================
+17. PROGRESS TRACKING AND STUDENT FEATURES
+==================================================
+
+Implement functional study tools.
+
+Track:
+- Completed lessons.
+- Lessons in progress.
+- Unstarted lessons.
+- Quiz attempts.
+- Quiz scores.
+- Incorrect answers.
+- Bookmarked concepts.
+- Saved questions.
+- Personal notes.
+- Revision history.
+- Subject-wise progress.
+- Module-wise progress.
+- Overall syllabus coverage.
+
+Provide a revision dashboard that identifies weak topics.
+
+Allow students to continue from the last studied lesson.
+
+Store data persistently using a suitable database or reliable storage mechanism.
+
+Use proper user authentication if accounts are implemented.
+
+If the project is a single-user local study application, provide a sensible local persistence option.
+
+Do not display fake progress.
+
+Progress must be calculated from actual lesson and assessment records.
+
+==================================================
+18. WEB RESEARCH AND REFERENCES
+==================================================
+
+Use reliable academic resources to develop and verify the study material.
+
+Useful starting points include:
+
+Chemistry LibreTexts:
+https://chem.libretexts.org/
+
+IUPAC:
+https://iupac.org/
+
+PubChem:
+https://pubchem.ncbi.nlm.nih.gov/
+
+Google Scholar:
+https://scholar.google.com/
+
+Google Machine Learning Education:
+https://developers.google.com/machine-learning
+
+Purdue OWL:
+https://owl.purdue.edu/
+
+Quran.com:
+https://quran.com/
+
+Tanzil:
+https://tanzil.net/
+
+Also use relevant textbooks, peer-reviewed papers, university course materials, and authoritative documentation.
+
+These resources are starting points, not a complete bibliography.
+
+For each lesson:
+- Record relevant references.
+- Link to the source where possible.
+- Distinguish sourced facts from explanations.
+- Verify important claims.
+- Check equations and calculations.
+- Identify outdated or uncertain information.
+- Avoid fabricated citations.
+- Do not copy entire copyrighted textbooks or articles.
+
+Use original educational explanations based on verified sources.
+
+For fast-changing topics, record the date of verification.
+
+==================================================
+19. CONTENT DATABASE AND ARCHITECTURE
+==================================================
+
+Build a proper content architecture rather than hardcoding every page separately.
+
+Use structured data models for:
+
+Subjects
+Modules
+Topics
+Lessons
+Learning objectives
+Definitions
+Equations
+Examples
+Worked solutions
+Diagrams
+References
+MCQs
+Short questions
+Long questions
+Quiz attempts
+Flashcards
+Bookmarks
+Notes
+Progress records
+Language variants
+
+Every topic should have a stable identifier.
+
+Questions must link to the relevant topic and lesson.
+
+Related concepts must link to one another.
+
+English and Roman Urdu content must map to the same lesson identifiers.
+
+Use a scalable architecture that allows more lessons to be added without redesigning the application.
+
+If a backend is required, implement it properly.
+
+If an existing project already contains a working framework, inspect it and preserve useful functionality instead of unnecessarily rebuilding everything.
+
+==================================================
+20. BUILD THE APP IN SMALL, PERSISTENT PHASES
+==================================================
+
+This project is large.
+
+Do not attempt to generate the entire application and all seven subjects in one enormous operation if that would cause incomplete files, timeouts, or unfinished content.
+
+Work in manageable phases while preserving the project state.
+
+PHASE 1:
+Inspect the existing project.
+Identify the framework, routes, components, data models, and existing content.
+Create an implementation plan.
+Create CONTENT_COMPLETION_PLAN.md.
+
+PHASE 2:
+Build and verify the core application architecture, navigation, database, subject pages, lesson rendering, search, and responsive design.
+
+PHASE 3:
+Create the complete syllabus map for all seven subjects.
+Map each syllabus topic to its planned lessons.
+Record uncertainties and missing official syllabus information.
+
+PHASE 4:
+Build the complete learning content for Subject 1:
+Scientific Writing & Research Methods.
+
+PHASE 5:
+Build Subject 2:
+Applied Artificial Intelligence for Decision Making.
+
+PHASE 6:
+Build Subject 3:
+Surface Chemistry.
+
+PHASE 7:
+Build Subject 4:
+Polymers and Advanced Composite Materials.
+
+PHASE 8:
+Build Subject 5:
+Advanced Photochemistry.
+
+PHASE 9:
+Build Subject 6:
+Literature Survey and Technical Writing.
+
+PHASE 10:
+Build Subject 7:
+Translation of Holy Quran.
+
+PHASE 11:
+Create and verify topic-wise MCQs, short questions, long questions, exercises, quizzes, and model answers.
+
+PHASE 12:
+Implement bilingual content, bookmarks, notes, revision planning, and progress tracking.
+
+PHASE 13:
+Audit the entire application for missing content, broken links, incorrect answers, incomplete lessons, and technical errors.
+
+The phases may be divided into smaller tasks whenever needed.
+
+At the end of each task:
+1. Save all work.
+2. Update CONTENT_COMPLETION_PLAN.md.
+3. Record what was completed.
+4. Record what remains incomplete.
+5. Run relevant checks.
+6. Ensure the project can still run.
+7. Provide a concise status report.
+
+Never claim a subject is complete when only its interface or syllabus headings exist.
+
+==================================================
+21. CONTENT COMPLETION CHECKLIST
+==================================================
+
+Maintain a persistent checklist containing:
+
+- Subject name.
+- Official syllabus verification status.
+- Module count.
+- Topic count.
+- Completed lesson count.
+- Incomplete lesson count.
+- English content status.
+- Roman Urdu content status.
+- Examples completed.
+- Worked solutions completed.
+- Diagrams completed.
+- MCQs completed and verified.
+- Short questions completed.
+- Long questions completed.
+- Exercises and answer keys completed.
+- References checked.
+- Quiz functionality checked.
+- Final audit status.
+
+Calculate completion from actual content records.
+
+Do not mark the entire app 100% complete while required learning content is missing.
+
+If content remains incomplete, explicitly identify it.
+
+==================================================
+22. FINAL QUALITY REQUIREMENTS
+==================================================
+
+Before declaring the app complete, verify that:
+
+- All seven subjects exist.
+- Every subject has a meaningful syllabus structure.
+- Every syllabus topic maps to actual lessons.
+- Lessons contain substantial educational explanations.
+- Important definitions are accurate.
+- Difficult concepts have examples.
+- Mathematical topics have worked solutions.
+- MCQs have verified answers and explanations.
+- Short questions have model answers.
+- Long questions have detailed answers.
+- Diagrams and concept connections are useful.
+- English and Roman Urdu learning content both exist.
+- Search returns relevant lessons and questions.
+- Quizzes work correctly.
+- Bookmarks and notes persist.
+- Progress reflects actual student activity.
+- References are authentic and relevant.
+- Quran content is verified and accurately referenced.
+- Navigation works on mobile and desktop.
+- No buttons lead to empty or broken pages.
+- No fake content, filler text, or misleading completion indicators remain.
+
+Do not sacrifice educational completeness for visual appearance.
+
+The interface should be professional, but the actual study material is the primary deliverable.
+
+==================================================
+23. YOUR FIRST TASK
+==================================================
+
+
+
+Start by auditing the current project and creating:
+
+1. PROJECT_AUDIT.md
+2. CONTENT_COMPLETION_PLAN.md
+3. MASTER_SYLLABUS_MAP.md
+4. A working list of verified and unverified syllabus topics.
+
+Then begin implementing the application and producing the actual learning content.
+
+Do not stop after generating these planning files.
+
+After the audit, continue with the first implementation phase.
+
+If the project already exists, preserve useful code and repair or extend it.
+
+Do not unnecessarily recreate the entire project from scratch.
+
+Do not fill the application with empty tabs and placeholder cards.
+
+Build a genuinely useful, comprehensive, university-level study platform.
+
+The final result must help a student STUDY, UNDERSTAND, PRACTICE, REVISE, AND PREPARE FOR EXAMS—not merely browse a beautiful website.
+========================================================
+24. CRITICAL REQUIREMENT: VERIFY MY COMPLETE SYLLABUS
+AND INCLUDE ALL MY SUPPLIED AND UOS-RESEARCHED COURSES
+========================================================
+
+This section is mandatory and takes priority over any
+assumption that the seven subjects listed earlier are
+already a complete or officially verified syllabus.
+
+I want a comprehensive MPhil Chemistry Study Hub based
+on BOTH:
+
+A. The syllabi and course information I personally supplied.
+B. Relevant course outlines and academic material
+   researched from the University of Sargodha (UOS).
+
+Do not omit information from either source.
+
+Do not assume that a course is irrelevant merely because
+its title or course code differs between documents.
+
+FIRST, create a complete source-verification report.
+
+OFFICIAL UNIVERSITY SOURCES:
+
+1. University of Sargodha official website:
+https://su.edu.pk/
+
+2. UOS Institute of Chemistry:
+https://www.su.edu.pk/department/chemistry
+
+3. UOS MPhil Chemistry programs:
+https://su.edu.pk/programs/9/M%20Phil/chemistry
+
+4. UOS Prospectus 2025:
+https://www.uos.edu.pk/public/upload/UOS-Prospectus-2025.pdf
+
+5. UOS Prospectus 2024:
+https://www.uos.edu.pk/public/upload/UOS-Prospectus-2024.pdf
+
+6. Available UOS Chemistry course-outline document:
+https://su.edu.pk/upload/department/Chemsitry_1609322424.pdf
+
+IMPORTANT:
+These documents may represent different academic sessions,
+degree levels, specializations, or revised curricula.
+
+Never combine them blindly and claim that the result is
+the official syllabus for a single academic session.
+
+For every course, record:
+- Course title.
+- Course code, if available.
+- University/source.
+- Document publication or session year.
+- Degree level.
+- Specialization.
+- Semester, where specified.
+- Whether the title is explicitly listed.
+- Whether detailed course contents are available.
+- Whether the information matches my supplied syllabus.
+- Verification status.
+- Missing information requiring confirmation.
+
+Use these statuses:
+VERIFIED IN OFFICIAL SOURCE
+VERIFIED IN USER-SUPPLIED SYLLABUS
+PARTIALLY VERIFIED
+SUPPLEMENTARY ACADEMIC CONTENT
+REQUIRES CURRENT-SESSION CONFIRMATION
+
+Never invent verification results.
+
+========================================================
+25. UOS COURSES THAT MUST BE INCLUDED
+========================================================
+
+The following three courses were found in available
+University of Sargodha Chemistry course documents.
+
+COURSE A:
+Polymer and Advanced Composite Materials
+Reference code: CHEM-7119
+
+COURSE B:
+Advanced Photochemistry
+Reference code: CHEM-7123
+
+COURSE C:
+Surface Chemistry
+Reference code: CHEM-7124
+
+These are mandatory learning areas for my Study Hub.
+
+Research each course individually.
+
+Do not stop after displaying its title or course code.
+
+Find the detailed course description, topic outline,
+recommended textbooks, academic references, and relevant
+learning resources wherever available.
+
+If an official detailed course description cannot be found,
+say so explicitly and construct a supplementary postgraduate
+curriculum from reliable academic sources.
+
+Never invent a detailed syllabus and label it as the
+official University of Sargodha syllabus.
+
+IMPORTANT DEGREE-LEVEL CHECK:
+
+The available UOS documents contain different course
+structures and degree-level information.
+
+For example, the available prospectus material lists
+Polymer and Advanced Composite Materials, Advanced
+Photochemistry, and Surface Chemistry within the Physical
+Chemistry course structure, but their precise status for
+my current academic session must be verified.
+
+Keep the original course titles and codes intact in the
+source-verification report.
+
+========================================================
+26. COMPLETE POLYMER AND ADVANCED COMPOSITE MATERIALS
+========================================================
+
+For CHEM-7119, research and create comprehensive study
+material for all verified syllabus topics.
+
+At minimum, investigate the following learning areas:
+
+1. Fundamentals and classification of polymers.
+2. Natural and synthetic polymers.
+3. Polymer nomenclature and repeat units.
+4. Polymer architecture and molecular structure.
+5. Addition and condensation polymerization.
+6. Chain-growth and step-growth polymerization.
+7. Free-radical polymerization mechanisms.
+8. Ionic and coordination polymerization.
+9. Copolymerization and polymerization kinetics.
+10. Polymer configuration and conformation.
+11. Tacticity and stereoregularity.
+12. Crystalline and amorphous polymers.
+13. Glass transition and melting temperature.
+14. Number-average and weight-average molecular weight.
+15. Molecular weight distribution and polydispersity.
+16. Degree of polymerization.
+17. Polymer solutions and solvent interactions.
+18. Polymer thermodynamics and Flory-Huggins theory.
+19. Polymer blends, miscibility, and phase separation.
+20. Plasticization and swelling.
+21. Polymer characterization and spectroscopy.
+22. FTIR and NMR applications.
+23. Gel permeation chromatography and size-exclusion
+    chromatography.
+24. DSC, TGA, DMA, and thermal analysis.
+25. XRD, SEM, and TEM applications.
+26. Polymer rheology and viscoelasticity.
+27. Stress-strain behaviour and mechanical testing.
+28. Electrical, thermal, and other relevant properties.
+29. Polymer degradation and aging.
+30. Composite classification and constituent materials.
+31. Polymer matrix composites.
+32. Fibre-reinforced and particle-reinforced composites.
+33. Nanocomposites and hybrid composites.
+34. Matrix-reinforcement interfaces and load transfer.
+35. Rule of mixtures and relevant calculations.
+36. Composite manufacturing and processing.
+37. Composite characterization and failure mechanisms.
+38. Conducting, biodegradable, and smart polymers.
+39. Advanced polymer applications.
+40. Sustainable polymers, recycling, and current research.
+
+This is a supplementary coverage checklist, not a claim
+that every item is explicitly present in the official
+CHEM-7119 course description.
+
+First identify the topics confirmed by the official
+course outline. Then include relevant supplementary topics
+to ensure complete postgraduate-level understanding.
+
+For every topic, provide:
+- Detailed theory.
+- Accurate definitions.
+- Reaction mechanisms where applicable.
+- Equations and derivations.
+- Step-by-step solved numerical examples.
+- Molecular structures or diagrams where useful.
+- Practical applications.
+- Comparison tables.
+- Short questions with complete answers.
+- Long questions with structured model answers.
+- Verified MCQs with explanations.
+- Practice problems and answer keys.
+- Reliable references.
+
+Do not reduce this subject to brief introductory notes.
+
+========================================================
+27. COMPLETE ADVANCED PHOTOCHEMISTRY
+========================================================
+
+For CHEM-7123, verify the official course content and
+build a detailed learning pathway.
+
+Investigate and cover, where relevant:
+
+1. Fundamentals of photochemistry.
+2. Electromagnetic radiation and photon energy.
+3. Absorption of light and electronic transitions.
+4. Beer-Lambert law and absorption spectra.
+5. Excited electronic states.
+6. Singlet and triplet states.
+7. Jablonski diagrams.
+8. Fluorescence and phosphorescence.
+9. Internal conversion and intersystem crossing.
+10. Excited-state lifetimes.
+11. Primary and secondary photochemical processes.
+12. Grotthuss-Draper law.
+13. Stark-Einstein law.
+14. Quantum yield and quantum-yield calculations.
+15. Radiation sources and photochemical instruments.
+16. Chemical actinometry.
+17. Photochemical kinetics.
+18. Energy transfer and electron transfer.
+19. Quenching and Stern-Volmer analysis.
+20. Photosensitization.
+21. Radical formation and reaction mechanisms.
+22. Photocatalysis.
+23. Semiconductor photocatalysts.
+24. Photopolymerization.
+25. Environmental and atmospheric photochemistry.
+26. Solar-energy-related photochemical processes.
+27. Experimental errors, controls, and reproducibility.
+28. Relevant advanced research applications.
+
+This is a coverage checklist for research, not a claim
+that all these topics are explicitly listed in the official
+UOS syllabus.
+
+Verify the actual course outline first.
+
+Provide detailed explanations, equations, worked
+calculations, reaction schemes, labelled diagrams,
+mechanism-based questions, MCQs, short answers,
+long answers, and revision tests.
+
+========================================================
+28. COMPLETE SURFACE CHEMISTRY
+========================================================
+
+For CHEM-7124, investigate the actual UOS course
+description and cover all verified syllabus topics.
+
+Investigate these areas in particular:
+
+1. Surface and interface fundamentals.
+2. Surface energy and surface tension.
+3. Adsorption versus absorption.
+4. Physisorption and chemisorption.
+5. Adsorption equilibria.
+6. Langmuir adsorption isotherm.
+7. Freundlich adsorption isotherm.
+8. BET adsorption theory.
+9. Henry's law and its relevant applications.
+10. Gas-solid adsorption.
+11. Monolayer and multilayer adsorption.
+12. BET surface-area calculations.
+13. Surface heterogeneity.
+14. Gibbs adsorption isotherm.
+15. Surface excess concentration.
+16. Wetting, contact angle, and capillarity.
+17. Surfactants and critical micelle concentration.
+18. Colloids and colloidal stability.
+19. Electrical double layers and zeta potential.
+20. DLVO theory where relevant.
+21. Surface characterization techniques.
+22. SEM, TEM, AFM, and STM.
+23. XPS, LEED, FEM, and FIM where relevant.
+24. Heterogeneous catalysis and active sites.
+25. Adsorption, reaction, and desorption in catalysis.
+26. Porous materials and nanomaterial surfaces.
+27. Electrochemical interfaces.
+28. Industrial and environmental applications.
+
+This is a research and coverage checklist, not a claim
+that every topic appears explicitly in the official
+CHEM-7124 course outline.
+
+Separate verified official topics from supplementary
+advanced topics.
+
+For every topic, include detailed theory, equations,
+derivations where applicable, labelled graphs, solved
+numericals, practical applications, short questions,
+long questions, MCQs with explanations, and references.
+
+========================================================
+29. INCLUDE MY PERSONALLY SUPPLIED CHEM-7101 SYLLABUS
+========================================================
+
+I supplied a Scientific Writing & Research Methods syllabus
+labelled CHEM-7101.
+
+Its title does not match the title listed for CHEM-7101
+in some older UOS Chemistry course documents.
+
+Do not silently change my supplied syllabus.
+
+Keep it in the Study Hub as:
+
+"Scientific Writing & Research Methods
+(User-Supplied Syllabus — CHEM-7101 Reference)"
+
+Use my supplied contents and 18-week teaching schedule
+as the starting curriculum.
+
+Include:
+
+Week 1:
+Literature survey and literature sources.
+
+Week 2:
+Chemical Abstracts, author indexes, and formula indexes.
+
+Week 3:
+Systematic literature survey and keyword searching.
+
+Week 4:
+Central Library demonstration and library research.
+
+Week 5:
+Digital resources and chemical databases.
+
+Week 6:
+Literature survey presentation.
+
+Week 7:
+Referencing and EndNote/Mendeley.
+
+Week 8:
+Journal author instructions and manuscript templates.
+
+Week 9:
+Midterm examination.
+
+Week 10:
+Research synopsis.
+
+Week 11:
+Thesis composition.
+
+Week 12:
+Full-length research articles and conference proceedings.
+
+Week 13:
+Scientific communication and patent manuscripts.
+
+Week 14:
+Impact factor, h-index, and i10-index.
+
+Week 15:
+SCImago, HJRS, journal quartiles, and Web of Science.
+
+Week 16:
+Turnitin, plagiarism, research integrity, and reproducibility.
+
+Week 17:
+Animal research ethics and responsible AI use.
+
+Week 18:
+Final examination.
+
+Also include the syllabus topics:
+- Primary and secondary literature sources.
+- Research and review articles.
+- Scientific books.
+- Web of Science.
+- SciFinder.
+- PubChem.
+- Reaxys.
+- ChemSpider.
+- Beilstein where relevant.
+- Boolean operators and search filters.
+- Synopsis and thesis writing.
+- Manuscript writing.
+- Research ethics.
+- Data integrity.
+- Research reproducibility.
+- Animal research ethics.
+- Responsible AI use.
+
+Create complete lessons, examples, practical assignments, MCQs,
+short and long questions, and model answers.
+
+Do not label this user-supplied syllabus as the officially
+verified current UOS CHEM-7101 syllabus unless evidence
+confirms the match.
+
+If another official course with the same code has a
+different title, show the discrepancy in the audit report
+and request confirmation of the correct academic session.
+
+========================================================
+30. PRESERVE ALL SEVEN SUBJECTS
+========================================================
+
+The complete Study Hub must continue to include:
+
+1. Scientific Writing & Research Methods.
+2. Applied Artificial Intelligence for Decision Making.
+3. Surface Chemistry.
+4. Polymers and Advanced Composite Materials.
+5. Advanced Photochemistry.
+6. Literature Survey and Technical Writing.
+7. Translation of Holy Quran.
+
+Do not remove the separate Literature Survey and Technical
+Writing subject just because it overlaps with Scientific
+Writing & Research Methods.
+
+Do not remove the user's supplied course merely because
+a course title or code differs in another UOS document.
+
+The three UOS-researched Chemistry courses must remain
+included in the seven-subject plan.
+
+If the university's current syllabus reveals additional
+required topics within these subjects, include them too.
+
+If official documentation reveals another distinct
+required course relevant to the user's supplied curriculum,
+record it in the audit and ask whether it should be added
+as an eighth subject rather than silently replacing anything.
+
+========================================================
+31. FINAL SYLLABUS VERIFICATION AND COMPLETENESS AUDIT
+========================================================
+
+Before completing the Study Hub, create a detailed
+comparison table containing:
+
+Column 1: Subject or course title.
+Column 2: Course code.
+Column 3: Source document and year.
+Column 4: Officially verified topics.
+Column 5: User-supplied topics.
+Column 6: Supplementary advanced topics.
+Column 7: Lessons created.
+Column 8: Missing content.
+Column 9: Verification status.
+Column 10: Remaining work.
+
+Verify every lesson against its mapped topic.
+
+Check all MCQ answers, explanations, calculations,
+chemical equations, and academic references.
+
+Never claim that the whole syllabus is complete if
+any mapped topic lacks its required learning material.
+
+The final objective is a genuinely comprehensive
+MPhil Chemistry learning platform whose content is
+traceable to official course documentation and reliable
+academic references.
+
+Correctness, completeness, transparency, and educational
+quality are more important than generating pages quickly.
