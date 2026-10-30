@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleUsernameSignup } from '../../src/server/username-signup';
+import { handleUsernameSignup } from '../../src/server/username-signup.ts';
 
 interface SignupApiRequest extends IncomingMessage {
   body?: unknown;

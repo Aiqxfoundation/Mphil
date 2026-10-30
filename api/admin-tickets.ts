@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleAdminTickets } from '../src/server/account-api';
+import { handleAdminTickets } from '../src/server/account-api.ts';
 
 interface AdminTicketApiRequest extends IncomingMessage {
   body?: unknown;

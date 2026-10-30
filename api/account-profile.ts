@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleAccountProfile } from '../src/server/account-api';
+import { handleAccountProfile } from '../src/server/account-api.ts';
 
 interface AccountApiRequest extends IncomingMessage {
   method?: string;

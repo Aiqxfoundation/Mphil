@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleSupportTickets } from '../src/server/account-api';
+import { handleSupportTickets } from '../src/server/account-api.ts';
 
 interface TicketApiRequest extends IncomingMessage {
   body?: unknown;
