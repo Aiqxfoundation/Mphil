@@ -265,7 +265,6 @@ export const StudyProvider: React.FC<{ children: React.ReactNode; user: User }> 
 
   const {
     data: studyData,
-    error: loadError,
     isLoading,
     mutate
   } = useSWR<PersistedStudyData>(['study-data', user.id], () => loadStudyData(user.id, username), {
