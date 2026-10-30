@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { isValidPhoneNumber, normalizePhoneNumber } from '../lib/username-auth.ts';
+import { TICKET_CATEGORIES, TICKET_LIMITS, TICKET_STATUSES } from '../lib/support-tickets.ts';
 
 interface AccountApiRequest {
   method?: string;
@@ -205,7 +206,12 @@ async function listAdminUsers(client: SupabaseClient): Promise<AccountApiResult>
         fullName: stringValue(profile.fullName),
         specialization: stringValue(profile.specialization),
         rollNumber: stringValue(profile.rollNumber),
-        session: stringValue(profile.session)
+        session: stringValue(profile.session),
+        points: typeof profile.points === 'number' ? profile.points : 0,
+        level: typeof profile.level === 'number' ? profile.level : 1,
+        streakDays: typeof profile.streakDays === 'number' ? profile.streakDays : 0,
+        completedLessonCount: studyData && Array.isArray(studyData.completedLessons) ? studyData.completedLessons.length : 0,
+        quizCount: studyData && Array.isArray(studyData.quizAttempts) ? studyData.quizAttempts.length : 0
       };
     });
 
@@ -353,4 +359,217 @@ export async function handleAdminUsers(request: AccountApiRequest): Promise<Acco
   }
 
   return updateAdminUser(auth.context.client, request.body);
+}
+
+const TICKET_COLUMNS = 'id, user_id, category, subject, message, status, admin_reply, replied_at, created_at';
+const MAX_TICKETS_PER_DAY = 10;
+
+function isOneOf<T extends string>(options: readonly T[], value: unknown): value is T {
+  return typeof value === 'string' && (options as readonly string[]).includes(value);
+}
+
+function mapTicket(row: Record<string, unknown>) {
+  return {
+    id: row.id,
+    userId: row.user_id,
+    category: row.category,
+    subject: row.subject,
+    message: row.message,
+    status: row.status,
+    adminReply: row.admin_reply ?? null,
+    repliedAt: row.replied_at ?? null,
+    createdAt: row.created_at
+  };
+}
+
+async function createTicket(client: SupabaseClient, userId: string, bodyValue: unknown): Promise<AccountApiResult> {
+  if (!isRecord(bodyValue)) {
+    return { status: 400, body: { message: 'Enter a valid request.' } };
+  }
+
+  const subject = stringValue(bodyValue.subject).trim();
+  const message = stringValue(bodyValue.message).trim();
+
+  if (
+    !isOneOf(TICKET_CATEGORIES, bodyValue.category) ||
+    subject.length < TICKET_LIMITS.subjectMin ||
+    subject.length > TICKET_LIMITS.subjectMax ||
+    message.length < TICKET_LIMITS.messageMin ||
+    message.length > TICKET_LIMITS.messageMax
+  ) {
+    return { status: 400, body: { message: 'Add a subject (3–120 characters) and a message (5–2000 characters).' } };
+  }
+
+  try {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { count, error: countError } = await client
+      .from('support_tickets')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .gte('created_at', since);
+
+    if (countError) {
+      return { status: 503, body: { message: 'Unable to submit your request right now.' } };
+    }
+
+    if ((count ?? 0) >= MAX_TICKETS_PER_DAY) {
+      return { status: 429, body: { message: 'You have reached the daily request limit. Try again tomorrow.' } };
+    }
+
+    const { data, error } = await client
+      .from('support_tickets')
+      .insert({ user_id: userId, category: bodyValue.category, subject, message })
+      .select(TICKET_COLUMNS)
+      .single();
+
+    if (error || !data) {
+      return { status: 503, body: { message: 'Unable to submit your request right now.' } };
+    }
+
+    return { status: 201, body: { ticket: mapTicket(data) } };
+  } catch {
+    return { status: 503, body: { message: 'Unable to submit your request right now.' } };
+  }
+}
+
+export async function handleSupportTickets(request: AccountApiRequest): Promise<AccountApiResult> {
+  const method = request.method ?? 'GET';
+  if (method !== 'GET' && method !== 'POST') {
+    return { status: 405, body: { message: 'Method not allowed.' } };
+  }
+
+  if (!isOriginAllowed(request, method === 'POST')) {
+    return { status: 403, body: { message: 'This request could not be verified.' } };
+  }
+
+  const auth = await authenticate(request);
+  if (!auth.ok) return auth.response;
+
+  if (method === 'POST') {
+    return createTicket(auth.context.client, auth.context.userId, request.body);
+  }
+
+  try {
+    const { data, error } = await auth.context.client
+      .from('support_tickets')
+      .select(TICKET_COLUMNS)
+      .eq('user_id', auth.context.userId)
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error) {
+      return { status: 503, body: { message: 'Unable to load your requests right now.' } };
+    }
+
+    return { status: 200, body: { tickets: (data ?? []).map(mapTicket) } };
+  } catch {
+    return { status: 503, body: { message: 'Unable to load your requests right now.' } };
+  }
+}
+
+async function listAllTickets(client: SupabaseClient): Promise<AccountApiResult> {
+  try {
+    const { data, error } = await client
+      .from('support_tickets')
+      .select(TICKET_COLUMNS)
+      .order('created_at', { ascending: false })
+      .limit(200);
+
+    if (error) {
+      return { status: 503, body: { message: 'Unable to load requests right now.' } };
+    }
+
+    const rows = data ?? [];
+    const userIds = [...new Set(rows.map((row) => row.user_id as string))];
+    const usernames = new Map<string, string>();
+
+    if (userIds.length > 0) {
+      const { data: profiles, error: profileError } = await client
+        .from('account_profiles')
+        .select('user_id, username')
+        .in('user_id', userIds);
+
+      if (profileError) {
+        return { status: 503, body: { message: 'Unable to load requests right now.' } };
+      }
+
+      for (const profile of profiles ?? []) usernames.set(profile.user_id, profile.username);
+    }
+
+    const tickets = rows.map((row) => ({
+      ...mapTicket(row),
+      username: usernames.get(row.user_id as string) ?? 'unknown'
+    }));
+
+    return { status: 200, body: { tickets } };
+  } catch {
+    return { status: 503, body: { message: 'Unable to load requests right now.' } };
+  }
+}
+
+async function updateTicket(client: SupabaseClient, bodyValue: unknown): Promise<AccountApiResult> {
+  if (!isRecord(bodyValue)) {
+    return { status: 400, body: { message: 'Enter a valid update.' } };
+  }
+
+  const ticketId = stringValue(bodyValue.ticketId);
+  const reply = typeof bodyValue.adminReply === 'string' ? bodyValue.adminReply.trim() : null;
+
+  if (
+    !UUID_PATTERN.test(ticketId) ||
+    !isOneOf(TICKET_STATUSES, bodyValue.status) ||
+    (reply !== null && reply.length > TICKET_LIMITS.messageMax)
+  ) {
+    return { status: 400, body: { message: 'Enter a valid status and a reply up to 2000 characters.' } };
+  }
+
+  try {
+    const { data: existing, error: existingError } = await client
+      .from('support_tickets')
+      .select('admin_reply')
+      .eq('id', ticketId)
+      .maybeSingle();
+
+    if (existingError) {
+      return { status: 503, body: { message: 'Unable to update this request right now.' } };
+    }
+
+    if (!existing) {
+      return { status: 404, body: { message: 'Request not found.' } };
+    }
+
+    const now = new Date().toISOString();
+    const update: Record<string, unknown> = { status: bodyValue.status, updated_at: now };
+
+    if (reply !== null && reply !== (existing.admin_reply ?? '')) {
+      update.admin_reply = reply || null;
+      update.replied_at = reply ? now : null;
+    }
+
+    const { error } = await client.from('support_tickets').update(update).eq('id', ticketId);
+    if (error) {
+      return { status: 503, body: { message: 'Unable to update this request right now.' } };
+    }
+
+    return { status: 200, body: { success: true } };
+  } catch {
+    return { status: 503, body: { message: 'Unable to update this request right now.' } };
+  }
+}
+
+export async function handleAdminTickets(request: AccountApiRequest): Promise<AccountApiResult> {
+  const method = request.method ?? 'GET';
+  if (method !== 'GET' && method !== 'PATCH') {
+    return { status: 405, body: { message: 'Method not allowed.' } };
+  }
+
+  if (!isOriginAllowed(request, method === 'PATCH')) {
+    return { status: 403, body: { message: 'This request could not be verified.' } };
+  }
+
+  const auth = await requireAdmin(request);
+  if (!auth.ok) return auth.response;
+
+  if (method === 'GET') return listAllTickets(auth.context.client);
+  return updateTicket(auth.context.client, request.body);
 }

@@ -3,7 +3,12 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { handleUsernameSignup } from './src/server/username-signup.ts';
-import { handleAccountProfile, handleAdminUsers } from './src/server/account-api.ts';
+import {
+  handleAccountProfile,
+  handleAdminTickets,
+  handleAdminUsers,
+  handleSupportTickets
+} from './src/server/account-api.ts';
 
 const localAuthApi: Plugin = {
   name: 'local-auth-api',
@@ -77,11 +82,13 @@ const localAccountApi: Plugin = {
   configureServer(server) {
     server.middlewares.use((request, response, next) => {
       const pathname = new URL(request.url ?? '/', 'http://localhost').pathname;
-      const handler = pathname === '/api/account-profile'
-        ? handleAccountProfile
-        : pathname === '/api/admin-users'
-          ? handleAdminUsers
-          : null;
+      const handlers: Record<string, typeof handleAccountProfile> = {
+        '/api/account-profile': handleAccountProfile,
+        '/api/admin-users': handleAdminUsers,
+        '/api/support-tickets': handleSupportTickets,
+        '/api/admin-tickets': handleAdminTickets
+      };
+      const handler = handlers[pathname] ?? null;
 
       if (!handler) {
         next();
@@ -108,7 +115,7 @@ const localAccountApi: Plugin = {
         });
       };
 
-      if (pathname !== '/api/admin-users' || request.method !== 'PATCH') {
+      if (request.method !== 'PATCH' && request.method !== 'POST') {
         execute(undefined);
         return;
       }
