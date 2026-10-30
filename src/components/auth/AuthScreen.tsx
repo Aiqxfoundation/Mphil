@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import {
   isValidPhoneNumber,
   isValidUsername,
+  legacyUsernameToAuthEmail,
   normalizePhoneNumber,
   normalizeUsername,
   usernameToAuthEmail
@@ -67,11 +68,19 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
         }
       }
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: usernameToAuthEmail(normalizedUsername),
+      let authResponse = await supabase.auth.signInWithPassword({
+        email: usernameToAuthEmail(normalizedUsername, import.meta.env.NEXT_PUBLIC_SUPABASE_URL),
         password
       });
 
+      if (authResponse.error) {
+        authResponse = await supabase.auth.signInWithPassword({
+          email: legacyUsernameToAuthEmail(normalizedUsername),
+          password
+        });
+      }
+
+      const { data, error } = authResponse;
       if (error || !data.session) {
         throw new Error('Username or password is incorrect.');
       }

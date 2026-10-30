@@ -107,7 +107,7 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
     });
 
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
-      email: usernameToAuthEmail(username),
+      email: usernameToAuthEmail(username, supabaseUrl),
       password,
       email_confirm: true,
       user_metadata: { username, phoneNumber }

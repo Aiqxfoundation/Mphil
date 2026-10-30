@@ -1,7 +1,7 @@
 const USERNAME_PATTERN = /^[a-z0-9_]{3,24}$/;
 const PHONE_NUMBER_PATTERN = /^\+?[0-9]{7,15}$/;
 const PHONE_INPUT_PATTERN = /^\+?[0-9\s().-]+$/;
-const INTERNAL_AUTH_DOMAIN = 'accounts.mphil-study.invalid';
+const LEGACY_AUTH_DOMAIN = 'accounts.mphil-study.invalid';
 
 export function normalizeUsername(value: string): string {
   return value.trim().toLowerCase();
@@ -25,6 +25,11 @@ export function isValidPhoneNumber(value: string): boolean {
   return PHONE_NUMBER_PATTERN.test(value);
 }
 
-export function usernameToAuthEmail(username: string): string {
-  return `${normalizeUsername(username)}@${INTERNAL_AUTH_DOMAIN}`;
+export function usernameToAuthEmail(username: string, supabaseUrl: string): string {
+  const projectDomain = new URL(supabaseUrl).hostname;
+  return `${normalizeUsername(username)}@${projectDomain}`;
+}
+
+export function legacyUsernameToAuthEmail(username: string): string {
+  return `${normalizeUsername(username)}@${LEGACY_AUTH_DOMAIN}`;
 }
