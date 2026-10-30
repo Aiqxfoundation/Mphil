@@ -81,6 +81,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
       }
 
       const { data, error } = authResponse;
+      if (error?.message.toLowerCase().includes('banned')) {
+        throw new Error('This account has been banned by an administrator.');
+      }
+
       if (error || !data.session) {
         throw new Error('Username or password is incorrect.');
       }

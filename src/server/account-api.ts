@@ -75,6 +75,11 @@ async function authenticate(request: AccountApiRequest): Promise<AuthResult> {
       return { ok: false, response: { status: 401, body: { message: 'Your session is invalid. Sign in again.' } } };
     }
 
+    const bannedUntil = data.user.banned_until ? Date.parse(data.user.banned_until) : 0;
+    if (bannedUntil > Date.now()) {
+      return { ok: false, response: { status: 403, body: { code: 'banned', message: 'This account has been banned by an administrator.' } } };
+    }
+
     return { ok: true, context: { client, userId: data.user.id } };
   } catch {
     return { ok: false, response: { status: 503, body: { message: 'Account services are unavailable.' } } };
@@ -155,7 +160,7 @@ async function listAdminUsers(client: SupabaseClient): Promise<AccountApiResult>
   try {
     const { data: accounts, error, count } = await client
       .from('account_profiles')
-      .select('user_id, username, phone_number, role, is_premium, created_at', { count: 'exact' })
+      .select('user_id, username, phone_number, role, is_premium, created_at, is_banned, banned_at', { count: 'exact' })
       .order('created_at', { ascending: true })
       .limit(250);
 
@@ -195,6 +200,8 @@ async function listAdminUsers(client: SupabaseClient): Promise<AccountApiResult>
         role: account.role,
         isPremium: account.is_premium,
         createdAt: account.created_at,
+        isBanned: account.is_banned === true,
+        bannedAt: typeof account.banned_at === 'string' ? account.banned_at : null,
         fullName: stringValue(profile.fullName),
         specialization: stringValue(profile.specialization),
         rollNumber: stringValue(profile.rollNumber),
@@ -267,6 +274,65 @@ async function updateAdminUser(
   }
 }
 
+const BAN_DURATION = '876000h';
+
+async function setUserBan(
+  client: SupabaseClient,
+  adminUserId: string,
+  bodyValue: unknown,
+  ban: boolean
+): Promise<AccountApiResult> {
+  const userId = isRecord(bodyValue) && typeof bodyValue.userId === 'string' ? bodyValue.userId : '';
+  if (!UUID_PATTERN.test(userId)) {
+    return { status: 400, body: { message: 'Choose a valid account.' } };
+  }
+
+  if (ban && userId === adminUserId) {
+    return { status: 400, body: { message: 'You cannot ban your own account.' } };
+  }
+
+  try {
+    const { data: target, error: targetError } = await client
+      .from('account_profiles')
+      .select('role')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (targetError) {
+      return { status: 503, body: { message: 'Unable to update this account right now.' } };
+    }
+
+    if (!target) {
+      return { status: 404, body: { message: 'Account not found.' } };
+    }
+
+    if (ban && target.role === 'admin') {
+      return { status: 400, body: { message: 'Admin accounts cannot be banned.' } };
+    }
+
+    const { error: authError } = await client.auth.admin.updateUserById(userId, {
+      ban_duration: ban ? BAN_DURATION : 'none'
+    });
+
+    if (authError) {
+      return { status: 503, body: { message: 'Unable to update this account right now.' } };
+    }
+
+    const { error: profileError } = await client
+      .from('account_profiles')
+      .update({ is_banned: ban, banned_at: ban ? new Date().toISOString() : null, updated_at: new Date().toISOString() })
+      .eq('user_id', userId);
+
+    if (profileError) {
+      return { status: 503, body: { message: 'Unable to update this account right now.' } };
+    }
+
+    return { status: 200, body: { success: true } };
+  } catch {
+    return { status: 503, body: { message: 'Unable to update this account right now.' } };
+  }
+}
+
 export async function handleAdminUsers(request: AccountApiRequest): Promise<AccountApiResult> {
   const method = request.method ?? 'GET';
   if (method !== 'GET' && method !== 'PATCH') {
@@ -281,5 +347,10 @@ export async function handleAdminUsers(request: AccountApiRequest): Promise<Acco
   if (!auth.ok) return auth.response;
 
   if (method === 'GET') return listAdminUsers(auth.context.client);
+  const action = isRecord(request.body) ? request.body.action : undefined;
+  if (action === 'ban' || action === 'unban') {
+    return setUserBan(auth.context.client, auth.context.userId, request.body, action === 'ban');
+  }
+
   return updateAdminUser(auth.context.client, request.body);
 }

@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import useSWR from 'swr';
+import { supabase } from '../lib/supabase';
 
 export type AccountRole = 'admin' | 'user';
 
@@ -33,6 +34,11 @@ async function fetchAccountProfile(accessToken: string): Promise<AccountProfile>
     cache: 'no-store'
   });
   const result: unknown = await response.json().catch(() => null);
+
+  if (response.status === 403 && isRecord(result) && result.code === 'banned') {
+    await supabase.auth.signOut();
+    throw new Error('This account has been banned by an administrator.');
+  }
 
   if (!response.ok || !isRecord(result) || !isRecord(result.account)) {
     const message = isRecord(result) && typeof result.message === 'string'

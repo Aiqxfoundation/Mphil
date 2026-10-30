@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useSWR from 'swr';
 import {
   ArrowLeft,
+  Ban,
   Crown,
   Phone,
   RefreshCw,
@@ -20,6 +21,8 @@ interface AdminUser {
   role: 'admin' | 'user';
   isPremium: boolean;
   createdAt: string;
+  isBanned: boolean;
+  bannedAt: string | null;
   fullName: string;
   specialization: string;
   rollNumber: string;
@@ -90,6 +93,7 @@ export const AdminPanel: React.FC = () => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [draft, setDraft] = useState<AdminDraft | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isBanning, setIsBanning] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
   const [saveError, setSaveError] = useState('');
 
@@ -164,6 +168,42 @@ export const AdminPanel: React.FC = () => {
       setSaveError(error instanceof Error ? error.message : 'Unable to save these profile changes.');
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleBanToggle = async () => {
+    if (!selectedUser) return;
+    const banning = !selectedUser.isBanned;
+    if (banning && !window.confirm(`Ban @${selectedUser.username}? They will be signed out and unable to sign in until unbanned.`)) return;
+
+    setIsBanning(true);
+    setSaveMessage('');
+    setSaveError('');
+
+    try {
+      const response = await fetch('/api/admin-users', {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: banning ? 'ban' : 'unban', userId: selectedUser.userId })
+      });
+      const result: unknown = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        const message = typeof result === 'object' && result !== null && 'message' in result && typeof result.message === 'string'
+          ? result.message
+          : 'Unable to update this account right now.';
+        throw new Error(message);
+      }
+
+      await mutate();
+      setSaveMessage(banning ? `@${selectedUser.username} has been banned.` : `@${selectedUser.username} has been unbanned.`);
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Unable to update this account right now.');
+    } finally {
+      setIsBanning(false);
     }
   };
 
@@ -296,11 +336,13 @@ export const AdminPanel: React.FC = () => {
                       <span className="block truncate text-sm font-semibold text-slate-900 dark:text-white">{user.fullName || user.username}</span>
                       <span className="mt-0.5 block truncate text-xs text-slate-500 dark:text-slate-400">@{user.username}{user.rollNumber ? ` · ${user.rollNumber}` : ''}</span>
                     </span>
-                    <span className={`shrink-0 rounded-full px-2 py-1 text-[10px] font-semibold ${user.role === 'admin'
-                      ? 'bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-200'
-                      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+                    <span className={`shrink-0 rounded-full px-2 py-1 text-[10px] font-semibold ${user.isBanned
+                      ? 'bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-200'
+                      : user.role === 'admin'
+                        ? 'bg-teal-100 text-teal-800 dark:bg-teal-900/50 dark:text-teal-200'
+                        : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                     }`}>
-                      {user.role === 'admin' ? 'Admin' : 'User'}
+                      {user.isBanned ? 'Banned' : user.role === 'admin' ? 'Admin' : 'User'}
                     </span>
                   </span>
                   <span className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400">
@@ -359,6 +401,37 @@ export const AdminPanel: React.FC = () => {
                   <span className="mt-0.5 block text-xs text-slate-500 dark:text-slate-400">Reserved for future features; this does not grant paid entitlements.</span>
                 </span>
               </label>
+
+              <div className={`rounded-xl border p-3 ${selectedUser.isBanned ? 'border-red-300 bg-red-50 dark:border-red-900 dark:bg-red-950/30' : 'border-slate-200 dark:border-slate-800'}`}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                      {selectedUser.isBanned ? 'This account is banned' : 'Account access'}
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                      {selectedUser.role === 'admin'
+                        ? 'Admin accounts cannot be banned.'
+                        : selectedUser.isBanned
+                          ? 'The user cannot sign in until you unban them.'
+                          : 'Banning blocks sign-in and ends access to the app.'}
+                    </p>
+                  </div>
+                  {selectedUser.role !== 'admin' && (
+                    <button
+                      type="button"
+                      onClick={() => void handleBanToggle()}
+                      disabled={isBanning}
+                      className={`inline-flex min-h-10 items-center gap-2 rounded-xl px-3.5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60 ${selectedUser.isBanned
+                        ? 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 focus-visible:ring-teal-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800'
+                        : 'bg-red-700 text-white hover:bg-red-800 focus-visible:ring-red-600'
+                      }`}
+                    >
+                      {selectedUser.isBanned ? <ShieldCheck aria-hidden="true" className="size-4" /> : <Ban aria-hidden="true" className="size-4" />}
+                      {isBanning ? 'Updating…' : selectedUser.isBanned ? 'Unban user' : 'Ban user'}
+                    </button>
+                  )}
+                </div>
+              </div>
 
               {saveError && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-800 dark:bg-red-950/40 dark:text-red-200">{saveError}</p>}
               {saveMessage && <p role="status" aria-live="polite" className="rounded-lg bg-teal-50 px-3 py-2 text-xs text-teal-800 dark:bg-teal-950/40 dark:text-teal-200">{saveMessage}</p>}
