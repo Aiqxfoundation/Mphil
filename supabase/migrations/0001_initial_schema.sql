@@ -58,11 +58,20 @@ language plpgsql
 security definer
 set search_path = ''
 as $$
+declare
+  v_role text := 'user';
 begin
-  insert into public.account_profiles (user_id, username, phone_number)
-  values (p_user_id, p_username, p_phone_number);
+  perform pg_advisory_xact_lock(7001);
+  if not exists (select 1 from public.account_profiles) then
+    v_role := 'admin';
+  end if;
+  insert into public.account_profiles (user_id, username, phone_number, role)
+  values (p_user_id, p_username, p_phone_number, v_role);
 end;
 $$;
+
+create unique index if not exists account_profiles_single_admin_idx
+  on public.account_profiles ((role)) where role = 'admin';
 
 create or replace function public.admin_update_account_profile(
   p_user_id uuid,
