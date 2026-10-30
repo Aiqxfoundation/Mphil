@@ -18,7 +18,7 @@ interface AuthScreenProps {
 }
 
 export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
-  const [mode, setMode] = useState<AuthMode>('sign-in');
+  const [mode, setMode] = useState<AuthMode>('sign-up');
   const [username, setUsername] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
