@@ -14,8 +14,15 @@ import {
   Edit3,
   Save,
   RotateCcw,
-  Languages
+  Languages,
+  Compass,
+  Microscope,
+  FlaskConical,
+  Dna,
+  Zap,
+  BookOpenCheck
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface AvailableBadge {
   id: string;
@@ -23,8 +30,9 @@ interface AvailableBadge {
   nameUrRoman: string;
   descEn: string;
   descUrRoman: string;
-  icon: string;
+  icon: LucideIcon;
   category: string;
+  subjectIndex?: number;
 }
 
 const allBadges: AvailableBadge[] = [
@@ -32,55 +40,60 @@ const allBadges: AvailableBadge[] = [
     id: 'b-1',
     nameEn: 'Syllabus Explorer',
     nameUrRoman: 'Syllabus Explorer',
-    descEn: 'Started navigating all 7 verified MPhil subjects',
-    descUrRoman: '7 subjects ka jaiza lena shuru kiya',
-    icon: '🧭',
-    category: 'Onboarding'
+    descEn: 'Completed at least one lesson in each of the 7 subjects.',
+    descUrRoman: '7 subjects mein har aik ka kam az kam aik lesson mukammal kiya.',
+    icon: Compass,
+    category: 'All subjects'
   },
   {
     id: 'b-2',
     nameEn: 'Research Methodology Pro',
     nameUrRoman: 'Research Methodology Pro',
-    descEn: 'Mastered hypotheses, variables, and SciFinder database searching',
-    descUrRoman: 'SciFinder aur variables ka ilm hasil kiya',
-    icon: '🔬',
-    category: 'Subject 1'
+    descEn: 'Completed every lesson in Subject 1.',
+    descUrRoman: 'Subject 1 ke tamam lessons mukammal kiye.',
+    icon: Microscope,
+    category: 'Subject 1',
+    subjectIndex: 0
   },
   {
     id: 'b-3',
     nameEn: 'Adsorption & Isotherm Master',
     nameUrRoman: 'Adsorption Master',
-    descEn: 'Solved Langmuir and BET surface area calculations with zero error',
-    descUrRoman: 'Langmuir aur BET ke solved numericals mukammal kiye',
-    icon: '🧪',
-    category: 'Subject 3'
+    descEn: 'Completed every lesson in Subject 3.',
+    descUrRoman: 'Subject 3 ke tamam lessons mukammal kiye.',
+    icon: FlaskConical,
+    category: 'Subject 3',
+    subjectIndex: 2
   },
   {
     id: 'b-4',
     nameEn: 'Polymer Kinetics Analyst',
     nameUrRoman: 'Polymer Analyst',
-    descEn: 'Understood Trommsdorff gel effect and solved Mn/Mw distribution math',
-    descUrRoman: 'Trommsdorff effect aur molecular weight averages seekhe',
-    icon: '🧬',
-    category: 'Subject 4'
+    descEn: 'Completed every lesson in Subject 4.',
+    descUrRoman: 'Subject 4 ke tamam lessons mukammal kiye.',
+    icon: Dna,
+    category: 'Subject 4',
+    subjectIndex: 3
   },
   {
     id: 'b-5',
     nameEn: 'Photochemical Pioneer',
     nameUrRoman: 'Photochem Pioneer',
-    descEn: 'Deconstructed Jablonski diagrams, fluorescence, and actinometry',
-    descUrRoman: 'Jablonski diagram aur quantum yield ke formulas samjhe',
-    icon: '⚡',
-    category: 'Subject 5'
+    descEn: 'Completed every lesson in Subject 5.',
+    descUrRoman: 'Subject 5 ke tamam lessons mukammal kiye.',
+    icon: Zap,
+    category: 'Subject 5',
+    subjectIndex: 4
   },
   {
     id: 'b-6',
     nameEn: 'Quranic Verification Scholar',
     nameUrRoman: 'Tehqeeq-e-Khabar Scholar',
-    descEn: 'Learned Surah Al-Hujurat ethical mandate of information verification (Ayah 6)',
-    descUrRoman: 'Surah Al-Hujurat ki aayat 6 ke tehqeeqi usool seekhe',
-    icon: '📖',
-    category: 'Subject 7'
+    descEn: 'Completed every lesson in Subject 7.',
+    descUrRoman: 'Subject 7 ke tamam lessons mukammal kiye.',
+    icon: BookOpenCheck,
+    category: 'Subject 7',
+    subjectIndex: 6
   }
 ];
 
@@ -98,7 +111,6 @@ export const ProfileView: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    username: userProfile.username,
     fullName: userProfile.fullName,
     session: userProfile.session,
     specialization: userProfile.specialization,
@@ -123,6 +135,25 @@ export const ProfileView: React.FC = () => {
     totalQuizCorrect += a.score;
   });
   const avgAccuracy = totalQuizQuestions > 0 ? Math.round((totalQuizCorrect / totalQuizQuestions) * 100) : 0;
+  const completedSubjectIds = new Set(
+    subjectsData
+      .filter((subject) => subject.modules.some((module) =>
+        module.topics.some((topic) => completedLessons.includes(topic.lessonContent.id))
+      ))
+      .map((subject) => subject.id)
+  );
+  const hasCompletedSubject = (subjectIndex: number) => {
+    const subject = subjectsData[subjectIndex];
+    const lessonIds = subject?.modules.flatMap((module) =>
+      module.topics.map((topic) => topic.lessonContent.id)
+    ) ?? [];
+    return lessonIds.length > 0 && lessonIds.every((lessonId) => completedLessons.includes(lessonId));
+  };
+  const earnedBadges = allBadges.filter((badge) =>
+    badge.id === 'b-1'
+      ? subjectsData.length > 0 && completedSubjectIds.size === subjectsData.length
+      : typeof badge.subjectIndex === 'number' && hasCompletedSubject(badge.subjectIndex)
+  );
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto pb-10">
@@ -138,19 +169,19 @@ export const ProfileView: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-                  {userProfile.fullName}
+                  {userProfile.fullName || userProfile.username}
                 </h1>
                 <span className="text-xs px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-400 font-mono-chem font-bold border border-teal-200 dark:border-teal-800">
                   Lvl {userProfile.level}
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono-chem">
-                @{userProfile.username} · {userProfile.rollNumber}
+                  @{userProfile.username} · {userProfile.rollNumber || 'Roll number not set'}
               </p>
               <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 mt-1.5">
-                <span>{userProfile.specialization}</span>
-                <span>·</span>
-                <span>{userProfile.session}</span>
+                  <span>{userProfile.specialization || 'Specialization not set'}</span>
+                  <span>·</span>
+                  <span>{userProfile.session || 'Session not set'}</span>
               </div>
             </div>
           </div>
@@ -170,16 +201,20 @@ export const ProfileView: React.FC = () => {
           <form onSubmit={handleSaveProfile} className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="profile-username">
                   Username
                 </label>
                 <input
+                  id="profile-username"
                   type="text"
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="w-full p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
-                  required
+                  value={userProfile.username}
+                  readOnly
+                  aria-describedby="profile-username-help"
+                  className="w-full cursor-not-allowed rounded-lg border border-slate-200 bg-slate-100 p-2.5 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
                 />
+                <p id="profile-username-help" className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                  This username is used to sign in and cannot be changed.
+                </p>
               </div>
 
               <div>
@@ -204,6 +239,7 @@ export const ProfileView: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, specialization: e.target.value })}
                   className="w-full p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white"
                 >
+                  <option value="">Choose a specialization</option>
                   <option value="Physical Chemistry">Physical Chemistry</option>
                   <option value="Organic Chemistry">Organic Chemistry</option>
                   <option value="Inorganic Chemistry">Inorganic Chemistry</option>
@@ -348,33 +384,48 @@ export const ProfileView: React.FC = () => {
             <span>MPhil Academic Badges & Milestones</span>
           </h3>
           <span className="text-xs font-mono-chem text-slate-400">
-            {allBadges.length} Total Milestones
+            {earnedBadges.length} {earnedBadges.length === 1 ? 'Badge Earned' : 'Badges Earned'}
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-2">
-          {allBadges.map((badge) => (
-            <div
-              key={badge.id}
-              className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-start gap-3"
-            >
-              <div className="text-2xl shrink-0 p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
-                {badge.icon}
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 dark:text-white">
-                  {language === 'en' ? badge.nameEn : badge.nameUrRoman}
-                </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
-                  {language === 'en' ? badge.descEn : badge.descUrRoman}
-                </p>
-                <div className="mt-2 text-[10px] font-semibold text-teal-700 dark:text-teal-400">
-                  {badge.category}
-                </div>
-              </div>
+        {earnedBadges.length === 0 ? (
+          <div className="flex items-start gap-3 rounded-xl border border-dashed border-slate-300 p-4 dark:border-slate-700">
+            <Award aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-slate-400" />
+            <div>
+              <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200">No badges earned yet</h4>
+              <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
+                Complete lessons to unlock milestones recorded from your study progress.
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2 md:grid-cols-3">
+            {earnedBadges.map((badge) => {
+              const BadgeIcon = badge.icon;
+              return (
+                <div
+                  key={badge.id}
+                  className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50/50 p-4 dark:border-slate-800 dark:bg-slate-800/30"
+                >
+                  <div className="shrink-0 rounded-lg border border-slate-100 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
+                    <BadgeIcon aria-hidden="true" className="size-5 text-teal-700 dark:text-teal-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                      {language === 'en' ? badge.nameEn : badge.nameUrRoman}
+                    </h4>
+                    <p className="mt-0.5 line-clamp-2 text-[11px] text-slate-500 dark:text-slate-400">
+                      {language === 'en' ? badge.descEn : badge.descUrRoman}
+                    </p>
+                    <div className="mt-2 text-[10px] font-semibold text-teal-700 dark:text-teal-400">
+                      {badge.category}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

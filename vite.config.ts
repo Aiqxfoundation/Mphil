@@ -1,22 +1,96 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
+import { handleUsernameSignup } from './src/server/username-signup';
 
-export default defineConfig(() => {
+const localAuthApi: Plugin = {
+  name: 'local-auth-api',
+  configureServer(server) {
+    server.middlewares.use('/api/auth/signup', (request, response, next) => {
+      if (request.method !== 'POST') {
+        void handleUsernameSignup({
+          method: request.method,
+          origin: request.headers.origin,
+          host: request.headers.host,
+          remoteAddress: request.socket.remoteAddress,
+          body: undefined
+        }).then((result) => {
+          response.statusCode = result.status;
+          response.setHeader('content-type', 'application/json; charset=utf-8');
+          response.setHeader('cache-control', 'no-store');
+          response.end(JSON.stringify(result.body));
+        });
+        return;
+      }
+
+      let requestBody = '';
+      let bodySize = 0;
+      let isTooLarge = false;
+      request.setEncoding('utf8');
+      request.on('data', (chunk: string) => {
+        const chunkSize = Buffer.byteLength(chunk);
+        bodySize += chunkSize;
+        if (bodySize > 10 * 1024) {
+          isTooLarge = true;
+          return;
+        }
+        requestBody += chunk;
+      });
+      request.on('end', () => {
+        if (isTooLarge) {
+          response.statusCode = 413;
+          response.setHeader('content-type', 'application/json; charset=utf-8');
+          response.end(JSON.stringify({ message: 'Request is too large.' }));
+          return;
+        }
+
+        let body: unknown;
+        try {
+          body = JSON.parse(requestBody);
+        } catch {
+          body = undefined;
+        }
+
+        void handleUsernameSignup({
+          method: request.method,
+          origin: request.headers.origin,
+          host: request.headers.host,
+          remoteAddress: request.socket.remoteAddress,
+          body
+        }).then((result) => {
+          response.statusCode = result.status;
+          response.setHeader('content-type', 'application/json; charset=utf-8');
+          response.setHeader('cache-control', 'no-store');
+          response.end(JSON.stringify(result.body));
+        });
+      });
+
+      request.on('error', () => next());
+    });
+  }
+};
+
+export default defineConfig(({ mode }) => {
+  const fileEnv = loadEnv(mode, process.cwd(), '');
+  for (const key of ['SUPABASE_URL', 'SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_ROLE_KEY'] as const) {
+    if (!process.env[key] && fileEnv[key]) process.env[key] = fileEnv[key];
+  }
+
   return {
-    plugins: [react(), tailwindcss()],
+    envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
+    plugins: [react(), tailwindcss(), localAuthApi],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
+        '@': path.resolve(__dirname, '.')
+      }
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
+      watch: process.env.DISABLE_HMR === 'true' ? null : {}
+    }
   };
 });

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StudyProvider, useStudy } from './context/StudyContext';
+import { useStudy } from './context/StudyContext';
+import { AuthGate } from './components/auth/AuthGate';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
@@ -22,7 +23,9 @@ const AppContent: React.FC = () => {
     setSearchQuery,
     navigateToLesson,
     language,
-    recentPointsEarned
+    recentPointsEarned,
+    storageError,
+    retrySave
   } = useStudy();
 
   // Search Results filtering across all 7 subjects
@@ -64,6 +67,21 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors selection:bg-teal-500 selection:text-white">
       {/* Sticky Top Header with Roman Urdu Switcher & Profile/Points Bar */}
       <Header />
+
+      {storageError && (
+        <div className="mx-auto w-full max-w-7xl px-4 pt-3 sm:px-6" role="alert">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-100">
+            <span>{storageError}</span>
+            <button
+              type="button"
+              onClick={retrySave}
+              className="rounded-lg border border-amber-400 px-3 py-1.5 text-xs font-semibold hover:bg-amber-100 dark:border-amber-800 dark:hover:bg-amber-900/60"
+            >
+              Retry save
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Floating XP Points Earned Toast Banner */}
       {recentPointsEarned && (
@@ -150,8 +168,8 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <StudyProvider>
+    <AuthGate>
       <AppContent />
-    </StudyProvider>
+    </AuthGate>
   );
 }
