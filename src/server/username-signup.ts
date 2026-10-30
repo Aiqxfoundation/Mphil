@@ -20,56 +20,9 @@ interface SignupResult {
   body: { message: string };
 }
 
-interface SignupBucket {
-  count: number;
-  resetsAt: number;
-}
-
-const signupBuckets = new Map<string, SignupBucket>();
-const signupWindowMs = 15 * 60 * 1000;
-const signupLimit = 5;
-
-function isSameOrigin(origin?: string, host?: string | string[]): boolean {
-  const forwardedHost = Array.isArray(host) ? host[0] : host;
-  const expectedHost = forwardedHost?.split(',')[0]?.trim();
-
-  if (!origin || !expectedHost) return false;
-
-  try {
-    const originUrl = new URL(origin);
-    const expectedOrigin = new URL(`${originUrl.protocol}//${expectedHost}`);
-    return originUrl.origin.toLowerCase() === expectedOrigin.origin.toLowerCase();
-  } catch {
-    return false;
-  }
-}
-
-function canAttemptSignup(address: string, now: number): boolean {
-  const key = address || 'unknown';
-  const bucket = signupBuckets.get(key);
-
-  if (!bucket || bucket.resetsAt <= now) {
-    signupBuckets.set(key, { count: 1, resetsAt: now + signupWindowMs });
-    return true;
-  }
-
-  if (bucket.count >= signupLimit) return false;
-
-  bucket.count += 1;
-  return true;
-}
-
 export async function handleUsernameSignup(request: SignupRequest): Promise<SignupResult> {
   if (request.method !== 'POST') {
     return { status: 405, body: { message: 'Method not allowed.' } };
-  }
-
-  if (!isSameOrigin(request.origin, request.host)) {
-    return { status: 403, body: { message: 'This request could not be verified.' } };
-  }
-
-  if (!canAttemptSignup(request.remoteAddress ?? 'unknown', Date.now())) {
-    return { status: 429, body: { message: 'Too many signup attempts. Try again later.' } };
   }
 
   if (!request.body || typeof request.body !== 'object' || Array.isArray(request.body)) {
@@ -119,10 +72,11 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
     });
 
     if (error || !data.user) {
-      return {
-        status: 409,
-        body: { message: 'Unable to create an account with those details. Choose another username or sign in.' }
-      };
+      if (error?.code === 'email_exists' || error?.code === 'user_already_exists') {
+        return { status: 409, body: { message: 'That username is already taken. Choose another one.' } };
+      }
+      console.error('[signup] createUser failed:', error?.code, error?.message);
+      return { status: 500, body: { message: 'Could not create your account. Please try again.' } };
     }
 
     const { error: profileError } = await supabaseAdmin.rpc('register_account_profile', {
@@ -132,8 +86,17 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
     });
 
     if (profileError) {
+      console.error('[signup] register_account_profile failed:', profileError.code, profileError.message);
       await supabaseAdmin.auth.admin.deleteUser(data.user.id);
-      return { status: 503, body: { message: 'Account creation is temporarily unavailable.' } };
+      const isTaken = profileError.code === '23505';
+      return {
+        status: isTaken ? 409 : 500,
+        body: {
+          message: isTaken
+            ? 'That username or phone number is already in use.'
+            : 'Could not save your profile. Please try again.'
+        }
+      };
     }
 
     return { status: 201, body: { message: 'Account created.' } };
