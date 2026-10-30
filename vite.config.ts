@@ -13,7 +13,7 @@ const localAuthApi: Plugin = {
         void handleUsernameSignup({
           method: request.method,
           origin: request.headers.origin,
-          host: request.headers.host,
+          host: request.headers['x-forwarded-host'] ?? request.headers.host,
           remoteAddress: request.socket.remoteAddress,
           body: undefined
         }).then((result) => {
@@ -56,7 +56,7 @@ const localAuthApi: Plugin = {
         void handleUsernameSignup({
           method: request.method,
           origin: request.headers.origin,
-          host: request.headers.host,
+          host: request.headers['x-forwarded-host'] ?? request.headers.host,
           remoteAddress: request.socket.remoteAddress,
           body
         }).then((result) => {

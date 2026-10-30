@@ -10,7 +10,7 @@ import {
 interface SignupRequest {
   method?: string;
   origin?: string;
-  host?: string;
+  host?: string | string[];
   remoteAddress?: string | null;
   body: unknown;
 }
@@ -29,11 +29,16 @@ const signupBuckets = new Map<string, SignupBucket>();
 const signupWindowMs = 15 * 60 * 1000;
 const signupLimit = 5;
 
-function isSameOrigin(origin?: string, host?: string): boolean {
-  if (!origin || !host) return false;
+function isSameOrigin(origin?: string, host?: string | string[]): boolean {
+  const forwardedHost = Array.isArray(host) ? host[0] : host;
+  const expectedHost = forwardedHost?.split(',')[0]?.trim();
+
+  if (!origin || !expectedHost) return false;
 
   try {
-    return new URL(origin).host.toLowerCase() === host.toLowerCase();
+    const originUrl = new URL(origin);
+    const expectedOrigin = new URL(`${originUrl.protocol}//${expectedHost}`);
+    return originUrl.origin.toLowerCase() === expectedOrigin.origin.toLowerCase();
   } catch {
     return false;
   }

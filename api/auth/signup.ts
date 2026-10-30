@@ -15,7 +15,7 @@ export default async function handler(req: SignupApiRequest, res: ServerResponse
   const result = await handleUsernameSignup({
     method: req.method,
     origin: headerValue(req.headers.origin),
-    host: headerValue(req.headers.host),
+    host: headerValue(req.headers['x-forwarded-host']) || headerValue(req.headers.host),
     remoteAddress: forwardedFor?.split(',')[0]?.trim() || req.socket.remoteAddress,
     body: req.body
   });
