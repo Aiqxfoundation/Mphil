@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleAdminUsers } from '../src/server/account-api';
+import { handleAdminUsers } from '../src/server/account-api.ts';
 
 interface AdminApiRequest extends IncomingMessage {
   body?: unknown;
