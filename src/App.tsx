@@ -13,6 +13,7 @@ import { QuestionBankView } from './components/questions/QuestionBankView';
 import { RevisionPlannerView } from './components/revision/RevisionPlannerView';
 import { SyllabusVerificationModal } from './components/audit/SyllabusVerificationModal';
 import { ProfileView } from './components/profile/ProfileView';
+import { AdminPanel } from './components/profile/AdminPanel';
 import { subjectsData } from './data/subjects';
 import { Search, X, Sparkles, ArrowRight } from 'lucide-react';
 
@@ -153,6 +154,7 @@ const AppContent: React.FC = () => {
         {view === 'revision' && <RevisionPlannerView />}
         {view === 'syllabus-matrix' && <SyllabusVerificationModal />}
         {view === 'profile' && <ProfileView />}
+        {view === 'admin' && <AdminPanel />}
       </main>
 
       {/* Mobile Ergonomic Bottom Navigation Bar (Fixed on mobile/tablet) */}

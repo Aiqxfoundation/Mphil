@@ -13,7 +13,8 @@ export type AppView =
   | 'question-bank'
   | 'revision'
   | 'syllabus-matrix'
-  | 'profile';
+  | 'profile'
+  | 'admin';
 
 interface PersistedStudyData {
   completedLessons: string[];

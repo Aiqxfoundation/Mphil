@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAccount } from '../../context/AccountContext';
 import { useStudy } from '../../context/StudyContext';
 import { subjectsData } from '../../data/subjects';
 import {
@@ -20,7 +21,8 @@ import {
   FlaskConical,
   Dna,
   Zap,
-  BookOpenCheck
+  BookOpenCheck,
+  Phone
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -103,11 +105,13 @@ export const ProfileView: React.FC = () => {
     updateUserProfile,
     language,
     setLanguage,
+    setView,
     completedLessons,
     bookmarkedLessons,
     userNotes,
     quizAttempts
   } = useStudy();
+  const { accountProfile } = useAccount();
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -182,6 +186,11 @@ export const ProfileView: React.FC = () => {
                   <span>{userProfile.specialization || 'Specialization not set'}</span>
                   <span>·</span>
                   <span>{userProfile.session || 'Session not set'}</span>
+              </div>
+              <div className="mt-1.5 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                <Phone aria-hidden="true" className="size-3.5" />
+                <span>{accountProfile?.phoneNumber || 'Phone number not added'}</span>
+                {accountProfile?.phoneNumber && <span className="text-[10px]">· unverified, no OTP</span>}
               </div>
             </div>
           </div>
@@ -292,6 +301,29 @@ export const ProfileView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {accountProfile?.role === 'admin' && (
+        <section className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-teal-200 bg-teal-50/80 p-5 dark:border-teal-900/70 dark:bg-teal-950/30 sm:flex-row sm:items-center sm:p-6">
+          <div className="flex items-start gap-3">
+            <div className="rounded-xl bg-white p-2.5 text-teal-700 shadow-sm dark:bg-slate-900 dark:text-teal-400">
+              <ShieldCheck aria-hidden="true" className="size-5" />
+            </div>
+            <div>
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">Administrator access</h2>
+              <p className="mt-1 max-w-xl text-xs leading-5 text-slate-600 dark:text-slate-400">
+                This is the first registered account. Manage user profiles and future premium flags here.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setView('admin')}
+            className="inline-flex min-h-10 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-teal-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2 dark:bg-teal-700 dark:hover:bg-teal-600 sm:w-auto"
+          >
+            <ShieldCheck aria-hidden="true" className="size-4" /> Open admin panel
+          </button>
+        </section>
+      )}
 
       {/* 4 Quantitative Study Activity Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

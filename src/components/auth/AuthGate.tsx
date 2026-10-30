@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import useSWR from 'swr';
 import type { Session } from '@supabase/supabase-js';
+import { AccountProvider } from '../../context/AccountContext';
 import { StudyProvider } from '../../context/StudyContext';
 import { supabase } from '../../lib/supabase';
 import { AuthScreen } from './AuthScreen';
@@ -72,7 +73,7 @@ export const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
 
   return (
     <StudyProvider key={session.user.id} user={session.user}>
-      {children}
+      <AccountProvider session={session}>{children}</AccountProvider>
     </StudyProvider>
   );
 };

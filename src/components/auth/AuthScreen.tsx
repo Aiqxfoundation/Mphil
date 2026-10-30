@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
-import { ArrowRight, FlaskConical, KeyRound, UserRound } from 'lucide-react';
+import { ArrowRight, FlaskConical, KeyRound, Phone, UserRound } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import {
+  isValidPhoneNumber,
   isValidUsername,
+  normalizePhoneNumber,
   normalizeUsername,
   usernameToAuthEmail
 } from '../../lib/username-auth';
@@ -17,6 +19,7 @@ interface AuthScreenProps {
 export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
   const [mode, setMode] = useState<AuthMode>('sign-in');
   const [username, setUsername] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +32,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
     const normalizedUsername = normalizeUsername(username);
     if (!isValidUsername(normalizedUsername)) {
       setErrorMessage('Use 3–24 characters: letters, numbers, or underscores.');
+      return;
+    }
+
+    const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber);
+    if (mode === 'sign-up' && !isValidPhoneNumber(normalizedPhoneNumber)) {
+      setErrorMessage('Enter a phone number with 7–15 digits.');
       return;
     }
 
@@ -49,7 +58,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
         const response = await fetch('/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: normalizedUsername, password })
+          body: JSON.stringify({ username: normalizedUsername, password, phoneNumber: normalizedPhoneNumber })
         });
         const result = (await response.json().catch(() => null)) as { message?: string } | null;
 
@@ -79,6 +88,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
     setMode(nextMode);
     setErrorMessage('');
     setConfirmPassword('');
+    setPhoneNumber('');
   };
 
   return (
@@ -105,7 +115,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
               {mode === 'sign-in'
                 ? 'Sign in to continue your saved lessons, notes, and quiz history.'
-                : 'Create a private study profile to save your progress across devices.'}
+                : 'Create a private study profile with your username and phone number to save progress across devices.'}
             </p>
           </div>
 
@@ -134,6 +144,35 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">3–24 letters, numbers, or underscores.</p>
             </div>
+
+            {mode === 'sign-up' && (
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="auth-phone" className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                  Phone number
+                </label>
+                <div className="relative">
+                  <Phone aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
+                  <input
+                    id="auth-phone"
+                    name="phoneNumber"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    value={phoneNumber}
+                    onChange={(event) => setPhoneNumber(event.target.value)}
+                    maxLength={24}
+                    required
+                    aria-invalid={Boolean(errorMessage)}
+                    aria-describedby="auth-phone-help"
+                    className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-3 text-sm outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-600/15 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                    placeholder="Phone number with country code"
+                  />
+                </div>
+                <p id="auth-phone-help" className="text-xs text-slate-500 dark:text-slate-400">
+                  Stored unverified. No OTP is sent.
+                </p>
+              </div>
+            )}
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="auth-password" className="text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -210,7 +249,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
           </div>
 
           <p className="mt-4 border-t border-slate-100 pt-4 text-center text-xs leading-5 text-slate-500 dark:border-slate-800 dark:text-slate-400">
-            No email address is collected. Because accounts use only a username and password, password recovery is unavailable.
+            No email address is collected. Phone numbers are stored unverified and no OTP is sent; password recovery is unavailable.
           </p>
         </section>
       </div>

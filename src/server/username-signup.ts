@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import {
+  isValidPhoneNumber,
   isValidUsername,
+  normalizePhoneNumber,
   normalizeUsername,
   usernameToAuthEmail
 } from '../lib/username-auth.ts';
@@ -72,6 +74,7 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
   const payload = request.body as Record<string, unknown>;
   const username = typeof payload.username === 'string' ? normalizeUsername(payload.username) : '';
   const password = typeof payload.password === 'string' ? payload.password : '';
+  const phoneNumber = typeof payload.phoneNumber === 'string' ? normalizePhoneNumber(payload.phoneNumber) : '';
 
   if (!isValidUsername(username)) {
     return {
@@ -82,6 +85,10 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
 
   if (password.length < 8 || password.length > 72) {
     return { status: 400, body: { message: 'Password must be 8–72 characters.' } };
+  }
+
+  if (!isValidPhoneNumber(phoneNumber)) {
+    return { status: 400, body: { message: 'Enter a phone number with 7–15 digits.' } };
   }
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -99,18 +106,29 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
       }
     });
 
-    const { error } = await supabaseAdmin.auth.admin.createUser({
+    const { data, error } = await supabaseAdmin.auth.admin.createUser({
       email: usernameToAuthEmail(username),
       password,
       email_confirm: true,
-      user_metadata: { username }
+      user_metadata: { username, phoneNumber }
     });
 
-    if (error) {
+    if (error || !data.user) {
       return {
         status: 409,
         body: { message: 'Unable to create an account with those details. Choose another username or sign in.' }
       };
+    }
+
+    const { error: profileError } = await supabaseAdmin.rpc('register_account_profile', {
+      p_user_id: data.user.id,
+      p_username: username,
+      p_phone_number: phoneNumber
+    });
+
+    if (profileError) {
+      await supabaseAdmin.auth.admin.deleteUser(data.user.id);
+      return { status: 503, body: { message: 'Account creation is temporarily unavailable.' } };
     }
 
     return { status: 201, body: { message: 'Account created.' } };
