@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAccount } from '../../context/AccountContext';
 import { useStudy } from '../../context/StudyContext';
 import { subjectsData } from '../../data/subjects';
+import { SupportTickets } from '../support/SupportTickets';
 import {
   User,
   Award,
@@ -371,6 +372,8 @@ export const ProfileView: React.FC = () => {
           <div className="text-[11px] text-slate-500 mt-1">{quizAttempts.length} Quizzes Attempted</div>
         </div>
       </div>
+
+      <SupportTickets />
 
       {/* Language Preference Settings Box */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-3">

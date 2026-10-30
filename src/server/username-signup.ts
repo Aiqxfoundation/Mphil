@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import {
   isValidPhoneNumber,
+  isValidSignupPassword,
   isValidUsername,
   normalizePhoneNumber,
   normalizeUsername,
@@ -37,16 +38,16 @@ export async function handleUsernameSignup(request: SignupRequest): Promise<Sign
   if (!isValidUsername(username)) {
     return {
       status: 400,
-      body: { message: 'Use 3–24 characters: lowercase letters, numbers, or underscores.' }
+      body: { message: 'Use 3–24 characters: letters, numbers, or underscores.' }
     };
   }
 
-  if (password.length < 8 || password.length > 72) {
-    return { status: 400, body: { message: 'Password must be 8–72 characters.' } };
+  if (!isValidSignupPassword(password)) {
+    return { status: 400, body: { message: 'Password must be 6 to 8 characters.' } };
   }
 
   if (!isValidPhoneNumber(phoneNumber)) {
-    return { status: 400, body: { message: 'Enter a phone number with 7–15 digits.' } };
+    return { status: 400, body: { message: 'Enter a valid phone number (7–15 digits).' } };
   }
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;

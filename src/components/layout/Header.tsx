@@ -41,13 +41,10 @@ export const Header: React.FC = () => {
             </div>
             <div>
               <div className="text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors flex items-center gap-1.5">
-                <span>MPhil Chemistry</span>
-                <span className="hidden xl:inline text-[10px] font-mono-chem px-1.5 py-0.5 rounded bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 font-bold border border-teal-200 dark:border-teal-800">
-                  UOS
-                </span>
+                <span>Noor Academy</span>
               </div>
-              <p className="hidden sm:block text-[10px] text-slate-500 dark:text-slate-400 -mt-0.5 font-medium">
-                {language === 'en' ? 'Postgraduate Study App' : 'MPhil Mobile Study App'}
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 -mt-0.5 font-medium">
+                MPhil Chemistry Study Hub
               </p>
             </div>
           </button>
@@ -145,34 +142,15 @@ export const Header: React.FC = () => {
             </button>
           </div>
 
-          {/* Points / XP Badge (Clickable to Profile) */}
-          <button
-            onClick={() => setView('profile')}
-            className="flex items-center gap-1 px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-bold font-mono-chem rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors select-none"
-            title="Your Earned XP Points - Click to View Profile"
+          {/* XP points (display only) */}
+          <div
+            className="flex items-center gap-1 px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-bold font-mono-chem rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 select-none"
+            title="Your earned XP points"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>{userProfile.points}</span>
             <span className="hidden sm:inline text-[10px] text-amber-600 dark:text-amber-400 font-normal">XP</span>
-          </button>
-
-          {/* User Profile Avatar & Username (Clickable to Profile) */}
-          <button
-            onClick={() => setView('profile')}
-            className={`flex items-center gap-1.5 p-1 sm:px-2 sm:py-1 rounded-lg border transition-colors group select-none ${
-              view === 'profile'
-                ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/40 text-teal-900 dark:text-teal-200'
-                : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500'
-            }`}
-            title={`Logged in as @${userProfile.username} - Click to customize profile`}
-          >
-            <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-teal-700 to-emerald-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0">
-              {userProfile.username.substring(0, 2).toUpperCase()}
-            </div>
-            <span className="hidden md:inline text-xs font-semibold truncate max-w-[90px]">
-              @{userProfile.username}
-            </span>
-          </button>
+          </div>
 
           {/* Search Trigger for Mobile */}
           <button
