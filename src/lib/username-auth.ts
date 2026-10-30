@@ -1,14 +1,21 @@
-const USERNAME_PATTERN = /^[a-z0-9_]{3,24}$/;
+const USERNAME_PATTERN = /^[A-Za-z0-9_]{3,24}$/;
 const PHONE_NUMBER_PATTERN = /^\+?[0-9]{7,15}$/;
 const PHONE_INPUT_PATTERN = /^\+?[0-9\s().-]+$/;
 const LEGACY_AUTH_DOMAIN = 'accounts.mphil-study.invalid';
 
+export const PASSWORD_MIN_LENGTH = 6;
+export const PASSWORD_MAX_LENGTH = 8;
+
 export function normalizeUsername(value: string): string {
-  return value.trim().toLowerCase();
+  return value.trim();
 }
 
 export function isValidUsername(value: string): boolean {
   return USERNAME_PATTERN.test(value);
+}
+
+export function isValidSignupPassword(value: string): boolean {
+  return value.length >= PASSWORD_MIN_LENGTH && value.length <= PASSWORD_MAX_LENGTH;
 }
 
 export function normalizePhoneNumber(value: string): string {
@@ -27,9 +34,9 @@ export function isValidPhoneNumber(value: string): boolean {
 
 export function usernameToAuthEmail(username: string, supabaseUrl: string): string {
   const projectDomain = new URL(supabaseUrl).hostname;
-  return `${normalizeUsername(username)}@${projectDomain}`;
+  return `${normalizeUsername(username).toLowerCase()}@${projectDomain}`;
 }
 
 export function legacyUsernameToAuthEmail(username: string): string {
-  return `${normalizeUsername(username)}@${LEGACY_AUTH_DOMAIN}`;
+  return `${normalizeUsername(username).toLowerCase()}@${LEGACY_AUTH_DOMAIN}`;
 }

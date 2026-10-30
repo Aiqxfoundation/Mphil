@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useAccount } from '../../context/AccountContext';
 import { useStudy } from '../../context/StudyContext';
+import { AdminTickets } from '../support/AdminTickets';
 
 interface AdminUser {
   userId: string;
@@ -447,6 +448,8 @@ export const AdminPanel: React.FC = () => {
           )}
         </section>
       </div>
+
+      <AdminTickets />
 
       <p className="flex items-start gap-2 rounded-xl bg-slate-100 px-4 py-3 text-xs leading-5 text-slate-600 dark:bg-slate-900 dark:text-slate-400">
         <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-slate-500" />
