@@ -3,7 +3,7 @@ import {
   isValidUsername,
   normalizeUsername,
   usernameToAuthEmail
-} from '../lib/username-auth';
+} from '../lib/username-auth.ts';
 
 interface SignupRequest {
   method?: string;

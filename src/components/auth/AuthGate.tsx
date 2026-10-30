@@ -32,10 +32,9 @@ export const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
 
   useEffect(() => {
     try {
-      document.documentElement.classList.toggle(
-        'dark',
-        window.localStorage.getItem('mphil_chem_theme') === 'dark'
-      );
+      const savedTheme = window.localStorage.getItem('mphil_chem_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', savedTheme ? savedTheme === 'dark' : prefersDark);
     } catch {
       document.documentElement.classList.remove('dark');
     }

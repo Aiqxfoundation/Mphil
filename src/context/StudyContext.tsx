@@ -250,7 +250,9 @@ export const StudyProvider: React.FC<{ children: React.ReactNode; user: User }> 
   });
   const [theme, setThemeState] = useState<'light' | 'dark'>(() => {
     try {
-      return window.localStorage.getItem('mphil_chem_theme') === 'dark' ? 'dark' : 'light';
+      const savedTheme = window.localStorage.getItem('mphil_chem_theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } catch {
       return 'light';
     }

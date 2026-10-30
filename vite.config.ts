@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
-import { handleUsernameSignup } from './src/server/username-signup';
+import { handleUsernameSignup } from './src/server/username-signup.ts';
 
 const localAuthApi: Plugin = {
   name: 'local-auth-api',
@@ -82,7 +82,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss(), localAuthApi],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.')
+        '@': path.resolve(import.meta.dirname, '.')
       }
     },
     server: {

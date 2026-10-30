@@ -334,7 +334,7 @@ export const ProfileView: React.FC = () => {
             <Award className="w-4 h-4 text-sky-500" />
           </div>
           <div className="text-2xl font-bold font-mono-chem text-sky-700 dark:text-sky-400">
-            {avgAccuracy > 0 ? `${avgAccuracy}%` : 'N/A'}
+            {totalQuizQuestions > 0 ? `${avgAccuracy}%` : 'N/A'}
           </div>
           <div className="text-[11px] text-slate-500 mt-1">{quizAttempts.length} Quizzes Attempted</div>
         </div>

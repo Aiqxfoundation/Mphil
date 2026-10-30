@@ -83,8 +83,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8 text-slate-900 dark:bg-slate-950 dark:text-slate-100 sm:py-12">
-      <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-md flex-col justify-center">
-        <div className="mb-7 flex items-center gap-3">
+      <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-md flex-col justify-center">
+        <div className="mb-5 flex items-center gap-3">
           <div className="flex size-12 items-center justify-center rounded-2xl bg-teal-800 text-white shadow-lg shadow-teal-900/15">
             <FlaskConical aria-hidden="true" className="size-6" />
           </div>
@@ -94,8 +94,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
           </div>
         </div>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900 sm:p-8">
-          <div className="mb-7">
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+          <div className="mb-5">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-400">
               {mode === 'sign-in' ? 'Your study space' : 'Start learning'}
             </p>
@@ -109,7 +109,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="auth-username" className="text-sm font-semibold text-slate-800 dark:text-slate-200">
                 Username
@@ -196,7 +196,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
             </button>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-5 dark:border-slate-800">
+          <div className="mt-4 border-t border-slate-100 pt-4 dark:border-slate-800">
             <p className="text-center text-sm text-slate-600 dark:text-slate-400">
               {mode === 'sign-in' ? 'New to the study hub?' : 'Already have an account?'}{' '}
               <button
@@ -208,11 +208,11 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthenticated }) => {
               </button>
             </p>
           </div>
-        </section>
 
-        <p className="mx-auto mt-5 max-w-sm text-center text-xs leading-5 text-slate-500 dark:text-slate-400">
-          No email address is collected. Because accounts use only a username and password, password recovery is unavailable.
-        </p>
+          <p className="mt-4 border-t border-slate-100 pt-4 text-center text-xs leading-5 text-slate-500 dark:border-slate-800 dark:text-slate-400">
+            No email address is collected. Because accounts use only a username and password, password recovery is unavailable.
+          </p>
+        </section>
       </div>
     </main>
   );
